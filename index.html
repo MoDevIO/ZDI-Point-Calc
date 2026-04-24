@@ -408,6 +408,7 @@
 		const resetAll = document.getElementById("resetAll");
 		const btnNo = document.getElementById("btnNo");
 		const btnYes = document.getElementById("btnYes");
+		const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
 
 		let currentIndex = 0;
 		let manualScrollOverride = false;
@@ -530,8 +531,10 @@
 				return;
 			}
 
-			const rowCenter = row.offsetTop + row.offsetHeight / 2;
-			const targetTop = rowCenter - lineList.clientHeight / 2;
+			const listRect = lineList.getBoundingClientRect();
+			const rowRect = row.getBoundingClientRect();
+			const rowCenter = (rowRect.top - listRect.top) + lineList.scrollTop + (rowRect.height / 2);
+			const targetTop = rowCenter - (lineList.clientHeight / 2);
 			const maxTop = Math.max(0, lineList.scrollHeight - lineList.clientHeight);
 			const nextTop = Math.max(0, Math.min(maxTop, targetTop));
 
@@ -541,12 +544,19 @@
 		function focusCurrent(scrollBehavior = "smooth") {
 			const row = lineList.querySelector(`.line[data-index="${currentIndex}"]`);
 			if (row) {
-				try {
-					row.focus({ preventScroll: true });
-				} catch {
-					row.focus();
+				if (!isCoarsePointer) {
+					try {
+						row.focus({ preventScroll: true });
+					} catch {
+						row.focus();
+					}
 				}
 				centerCurrentInView(scrollBehavior);
+
+				// Some mobile browsers still adjust scroll after layout changes.
+				if (isCoarsePointer) {
+					requestAnimationFrame(() => centerCurrentInView("auto"));
+				}
 			}
 			updateCurrentVisual();
 		}
