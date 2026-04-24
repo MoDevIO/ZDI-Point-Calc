@@ -6,18 +6,15 @@
 	<title>ZDI Point Calc 2026</title>
 	<style>
 		:root {
-			--bg-1: #061525;
-			--bg-2: #102741;
-			--bg-3: #1d4267;
-			--card: #0c1824;
-			--ink: #e7f2ff;
-			--muted: #8ca9c2;
+			--bg: #0d1f30;
+			--bg-soft: #132a40;
+			--ink: #eaf4ff;
+			--muted: #9bb6cb;
 			--ok: #2ed39a;
 			--no: #ff6464;
-			--warn: #ff6f6f;
-			--accent: #fbbf24;
-			--focus: #ff8c42;
-			--line: #1f3346;
+			--warn: #ff7a7a;
+			--focus: #ffd074;
+			--line: #29445d;
 		}
 
 		* {
@@ -27,264 +24,149 @@
 		html,
 		body {
 			margin: 0;
-			padding: 0;
-			min-height: 100%;
-		}
-
-		body {
-			color: var(--ink);
-			color-scheme: dark;
-			font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
-			background:
-				radial-gradient(1200px 600px at 15% -20%, rgba(255, 165, 91, 0.45), transparent 60%),
-				radial-gradient(1000px 500px at 95% 10%, rgba(80, 220, 255, 0.32), transparent 60%),
-				linear-gradient(180deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
-			padding: 20px;
-		}
-
-		.app {
-			width: min(1100px, 100%);
-			margin: 0 auto;
-			border-radius: 20px;
-			background: var(--card);
-			border: 1px solid #20364a;
-			box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+			height: 100%;
 			overflow: hidden;
 		}
 
-		.hero {
-			padding: 24px 22px;
-			color: #f4fbff;
-			background:
-				radial-gradient(450px 220px at 95% 0%, rgba(255, 220, 140, 0.5), transparent 70%),
-				linear-gradient(130deg, #0b223b, #173f62 55%, #21557a);
-		}
-
-		.hero h1 {
-			margin: 0;
-			font-size: clamp(1.2rem, 2.1vw, 2rem);
-			letter-spacing: 0.02em;
-			text-transform: uppercase;
-		}
-
-		.hero p {
-			margin: 10px 0 0;
-			color: #d4e8f6;
-			line-height: 1.4;
-			max-width: 72ch;
-		}
-
-		.layout {
-			padding: 20px;
+		body {
 			display: grid;
-			gap: 16px;
-			grid-template-columns: 320px 1fr;
+			grid-template-rows: auto minmax(0, 1fr) auto;
+			height: 100dvh;
+			color: var(--ink);
+			color-scheme: dark;
+			font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
+			background: linear-gradient(180deg, #091728, #0d2236 45%, #13324b);
 		}
 
-		.panel {
-			background: #0f1e2c;
-			border: 1px solid var(--line);
-			border-radius: 16px;
-			padding: 16px;
-		}
-
-		.score {
+		.top-bar {
+			padding: calc(8px + env(safe-area-inset-top)) 10px 8px;
+			border-bottom: 1px solid var(--line);
+			background: var(--bg-soft);
 			display: grid;
-			gap: 12px;
+			gap: 6px;
 		}
 
-		.score-box {
-			padding: 14px;
-			border-radius: 14px;
-			border: 1px solid #24384b;
-			background: linear-gradient(180deg, #132739, #102232);
-		}
-
-		.score-box strong {
-			display: block;
-			color: var(--muted);
-			font-size: 0.84rem;
-			text-transform: uppercase;
-			letter-spacing: 0.05em;
-			margin-bottom: 6px;
-		}
-
-		.score-big {
-			font-size: clamp(2.1rem, 4.2vw, 3.1rem);
-			font-weight: 800;
-			line-height: 1;
-			color: #d7f3ff;
-		}
-
-		.score-sub {
-			margin-top: 8px;
-			color: #93abc0;
-			font-size: 0.95rem;
-		}
-
-		.meta-row {
-			display: flex;
-			justify-content: space-between;
-			gap: 12px;
-			padding: 10px 0;
-			border-bottom: 1px solid #25384a;
-			font-size: 0.95rem;
-		}
-
-		.meta-row:last-child {
-			border-bottom: 0;
-		}
-
-		.meta-row span:last-child {
-			font-weight: 700;
-			color: #b3def7;
-		}
-
-		.touch-wrap {
-			margin-top: 10px;
-			border-radius: 10px;
-			background: #122537;
-			border: 1px solid #244156;
-			padding: 10px;
-		}
-
-		.touch-wrap label {
-			display: block;
-			font-size: 0.84rem;
-			margin-bottom: 5px;
-			color: #89a9c2;
-			font-weight: 600;
-			text-transform: uppercase;
-			letter-spacing: 0.04em;
-		}
-
-		.touch-wrap input {
-			width: 100%;
-			border-radius: 8px;
-			border: 1px solid #2e4a5f;
-			background: #0d1c2a;
-			color: #e4f0fc;
-			padding: 8px 10px;
-			font-size: 1rem;
-			font-family: "IBM Plex Mono", "Consolas", monospace;
-		}
-
-		.touch-wrap input:focus-visible,
-		.action:focus-visible,
-		.line.current {
-			outline: 3px solid color-mix(in srgb, var(--focus) 48%, transparent);
-			outline-offset: 1px;
-		}
-
-		.hint {
-			margin-top: 10px;
-			font-size: 0.88rem;
-			line-height: 1.45;
-			color: #9ab4c8;
-			background: #122537;
-			border: 1px solid #244156;
-			border-radius: 10px;
-			padding: 10px;
-		}
-
-		.actions {
-			margin-top: 12px;
-			display: flex;
-			gap: 8px;
-		}
-
-		.action {
-			border: 0;
-			border-radius: 10px;
-			padding: 10px 12px;
-			cursor: pointer;
-			font-weight: 700;
-			font-family: inherit;
-		}
-
-		.action.primary {
-			background: #1d7fb2;
-			color: #fff;
-		}
-
-		.action.secondary {
-			background: #143044;
-			color: #d0e8f7;
-		}
-
-		.list-header {
+		.top-row {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
 			gap: 10px;
-			margin-bottom: 10px;
+			flex-wrap: wrap;
 		}
 
-		.list-header h2 {
-			margin: 0;
-			font-size: 1.1rem;
-			color: #d8ebfa;
+		.score-big {
+			font-size: clamp(1.2rem, 3.5vw, 1.7rem);
+			font-weight: 800;
+			line-height: 1;
 		}
 
-		.index-chip {
-			border-radius: 999px;
-			background: #153248;
-			color: #b9ddf4;
-			border: 1px solid #2b4f68;
-			padding: 4px 10px;
-			font-size: 0.8rem;
+		.row-index {
+			font-size: 0.86rem;
+			color: var(--muted);
+		}
+
+		.stats {
+			display: flex;
+			gap: 10px;
+			flex-wrap: wrap;
+			font-size: 0.88rem;
+			color: var(--muted);
+		}
+
+		.stats b {
+			color: var(--ink);
+		}
+
+		.controls {
+			display: flex;
+			gap: 8px;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+
+		.controls label {
+			font-size: 0.88rem;
+			color: var(--muted);
+		}
+
+		.controls input {
+			width: 78px;
+			margin-left: 6px;
+			border-radius: 8px;
+			border: 1px solid #355672;
+			background: #0d2132;
+			color: var(--ink);
+			padding: 6px 8px;
+			font-size: 0.95rem;
+			font-family: "IBM Plex Mono", "Consolas", monospace;
+		}
+
+		.action {
+			border: 1px solid #355672;
+			border-radius: 8px;
+			padding: 6px 9px;
+			cursor: pointer;
 			font-weight: 700;
+			font-family: inherit;
+			background: #143148;
+			color: var(--ink);
+		}
+
+		.controls input:focus-visible,
+		.action:focus-visible,
+		.bottom-bar button:focus-visible,
+		.line.current {
+			outline: 3px solid color-mix(in srgb, var(--focus) 45%, transparent);
+			outline-offset: 1px;
+		}
+
+		.auto-bonus {
+			font-size: 0.8rem;
+			line-height: 1.35;
+			color: #b5d1e6;
 		}
 
 		.line-list {
+			min-height: 0;
 			margin: 0;
-			padding: 0;
+			padding: 8px;
 			list-style: none;
 			display: grid;
 			gap: 6px;
-			max-height: 72vh;
-			overflow: auto;
-			border: 1px solid #22374a;
-			border-radius: 14px;
-			padding: 8px;
-			background: #0d1b28;
+			overflow-y: auto;
+			overflow-x: hidden;
+			background: var(--bg);
 		}
 
 		.line {
 			display: grid;
-			grid-template-columns: 88px 1fr auto;
+			grid-template-columns: 68px 1fr auto;
 			align-items: center;
-			gap: 10px;
-			border: 1px solid #264056;
-			border-radius: 10px;
-			background: #122638;
-			padding: 9px 10px;
+			gap: 8px;
+			border: 1px solid #2b4660;
+			border-radius: 8px;
+			background: #10253a;
+			padding: 9px;
 			cursor: pointer;
 			user-select: none;
-			transition: transform 120ms ease, box-shadow 120ms ease;
-		}
-
-		.line:hover {
-			transform: translateY(-1px);
-			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.32);
 		}
 
 		.line:focus-visible {
-			outline: 3px solid color-mix(in srgb, var(--focus) 48%, transparent);
+			outline: 3px solid color-mix(in srgb, var(--focus) 45%, transparent);
 			outline-offset: 1px;
 		}
 
 		.state {
 			text-align: center;
 			border-radius: 999px;
-			border: 1px solid #3a556b;
+			border: 1px solid #40627c;
 			padding: 4px 8px;
-			font-size: 0.76rem;
+			font-size: 0.74rem;
 			font-weight: 800;
-			letter-spacing: 0.06em;
+			letter-spacing: 0.04em;
 			text-transform: uppercase;
-			color: #a9bfd1;
-			background: #1a3144;
+			color: #a7c0d5;
+			background: #1b334a;
 		}
 
 		.state.ok {
@@ -300,16 +182,16 @@
 		}
 
 		.line-title {
-			font-size: 0.94rem;
+			font-size: 0.9rem;
 			line-height: 1.3;
 			color: #deefff;
 		}
 
 		.line-points {
 			font-weight: 800;
-			font-size: 0.95rem;
+			font-size: 0.88rem;
 			color: #8dd6ff;
-			min-width: 58px;
+			min-width: 50px;
 			text-align: right;
 			font-family: "IBM Plex Mono", "Consolas", monospace;
 		}
@@ -318,85 +200,77 @@
 			color: var(--warn);
 		}
 
-		.auto-bonus {
-			margin-top: 10px;
-			border: 1px solid #2d4f68;
-			border-radius: 10px;
-			background: #132d42;
-			color: #c7e5fb;
-			padding: 10px;
-			font-size: 0.9rem;
-			line-height: 1.4;
+		.bottom-bar {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 8px;
+			padding: 8px max(8px, env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-right));
+			border-top: 1px solid var(--line);
+			background: var(--bg-soft);
 		}
 
-		.auto-bonus strong {
-			color: #e5f5ff;
+		.bottom-bar button {
+			border: 0;
+			border-radius: 8px;
+			padding: 12px 10px;
+			font-family: inherit;
+			font-size: 1rem;
+			font-weight: 800;
+			cursor: pointer;
 		}
 
-		@media (max-width: 980px) {
-			.layout {
-				grid-template-columns: 1fr;
-			}
+		#btnNo {
+			background: color-mix(in srgb, var(--no) 78%, #1f3041);
+			color: #340708;
+		}
 
-			.line-list {
-				max-height: 60vh;
+		#btnYes {
+			background: color-mix(in srgb, var(--ok) 78%, #1f3041);
+			color: #063024;
+		}
+
+		@media (min-width: 900px) {
+			body {
+				max-width: 920px;
+				margin: 0 auto;
+				border-left: 1px solid var(--line);
+				border-right: 1px solid var(--line);
 			}
 		}
 	</style>
 </head>
 <body>
-	<main class="app">
-		<header class="hero">
-			<h1>ZDI Space Adventures Punkte-Rechner</h1>
-			<p>Keyboard-first Modus: Enter = JA, Leertaste = NEIN. Nach jeder Eingabe springt der Fokus automatisch in die nächste Zeile.</p>
-		</header>
+	<section class="top-bar" aria-live="polite">
+		<div class="top-row">
+			<div class="score-big">Punkte: <span id="scoreBig">0</span> / 530</div>
+			<div id="rowIndex" class="row-index">Zeile 1/1</div>
+		</div>
 
-		<section class="layout">
-			<aside class="panel score" aria-live="polite">
-				<div class="score-box">
-					<strong>Gesamtpunktzahl</strong>
-					<div id="scoreBig" class="score-big">0</div>
-					<div class="score-sub">Maximal erreichbar: 530</div>
-				</div>
+		<div class="stats">
+			<span>Aufgaben: <b id="taskPoints">0</b></span>
+			<span>Bonus 3C: <b id="bonusPoints">0</b></span>
+			<span>Beruehrungsabzug: <b id="touchPenalty">0</b></span>
+			<span>Netto: <b id="netPoints">0</b></span>
+		</div>
 
-				<div class="score-box">
-					<div class="meta-row"><span>Aufgabenpunkte</span><span id="taskPoints">0</span></div>
-					<div class="meta-row"><span>Bonus 3C (auto)</span><span id="bonusPoints">0</span></div>
-					<div class="meta-row"><span>Abzug Berührungen</span><span id="touchPenalty">0</span></div>
-					<div class="meta-row"><span>Netto</span><span id="netPoints">0</span></div>
+		<div class="controls">
+			<label for="touchCount">Beruehrungen</label>
+			<input id="touchCount" type="number" min="0" step="1" value="0" inputmode="numeric">
+			<button id="focusStart" class="action" type="button">Start</button>
+			<button id="resetAll" class="action" type="button">Reset</button>
+		</div>
 
-					<div class="touch-wrap">
-						<label for="touchCount">Roboterberührungen außerhalb Base</label>
-						<input id="touchCount" type="number" min="0" step="1" value="0" inputmode="numeric">
-					</div>
-				</div>
+		<div id="autoBonusInfo" class="auto-bonus">
+			Bonus Aufgabe 3C: Wird automatisch vergeben, wenn Erdantenne und Weltallantenne beide auf <strong>rot</strong> stehen.
+		</div>
+	</section>
 
-				<div class="hint">
-					Pfeil hoch/runter: Zeile wechseln<br>
-					Enter: JA setzen<br>
-					Leertaste: NEIN setzen
-				</div>
+	<ul id="lineList" class="line-list" aria-label="Aufgaben-Checkliste"></ul>
 
-				<div class="actions">
-					<button id="focusStart" class="action primary" type="button">Eingabe starten</button>
-					<button id="resetAll" class="action secondary" type="button">Alles zurücksetzen</button>
-				</div>
-			</aside>
-
-			<section class="panel">
-				<div class="list-header">
-					<h2>Checkliste</h2>
-					<div id="rowIndex" class="index-chip">Zeile 1/1</div>
-				</div>
-
-				<ul id="lineList" class="line-list" aria-label="Aufgaben-Checkliste"></ul>
-
-				<div id="autoBonusInfo" class="auto-bonus">
-					<strong>Bonus Aufgabe 3C:</strong> Wird automatisch vergeben, wenn Erdantenne und Weltallantenne beide auf <strong>rot</strong> stehen.
-				</div>
-			</section>
-		</section>
-	</main>
+	<section class="bottom-bar" aria-label="Antwortleiste">
+		<button id="btnNo" type="button">NEIN (Space)</button>
+		<button id="btnYes" type="button">JA (Enter)</button>
+	</section>
 
 	<script>
 		const items = [
@@ -459,6 +333,8 @@
 		const touchCountInput = document.getElementById("touchCount");
 		const focusStart = document.getElementById("focusStart");
 		const resetAll = document.getElementById("resetAll");
+		const btnNo = document.getElementById("btnNo");
+		const btnYes = document.getElementById("btnYes");
 
 		let currentIndex = 0;
 
@@ -491,7 +367,6 @@
 
 				row.addEventListener("click", () => {
 					currentIndex = idx;
-					setAnswer(true, false);
 					focusCurrent();
 				});
 
@@ -573,6 +448,7 @@
 			const row = lineList.querySelector(`.line[data-index="${currentIndex}"]`);
 			if (row) {
 				row.focus();
+				row.scrollIntoView({ block: "nearest" });
 			}
 			updateCurrentVisual();
 		}
@@ -661,6 +537,14 @@
 			currentIndex = 0;
 			renderList();
 			focusCurrent();
+		});
+
+		btnYes.addEventListener("click", () => {
+			setAnswer(true, true);
+		});
+
+		btnNo.addEventListener("click", () => {
+			setAnswer(false, true);
 		});
 
 		renderList();
