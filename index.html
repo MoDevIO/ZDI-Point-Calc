@@ -412,6 +412,8 @@
 
 		let currentIndex = 0;
 		let manualScrollOverride = false;
+		let mobileRecenterTimer = null;
+		let scrollRequestId = 0;
 
 		function formatPoints(value) {
 			return value > 0 ? `+${value}` : `${value}`;
@@ -523,12 +525,12 @@
 
 		function centerCurrentInView(behavior = "smooth") {
 			if (manualScrollOverride) {
-				return;
+				return null;
 			}
 
 			const row = lineList.querySelector(`.line[data-index="${currentIndex}"]`);
 			if (!row) {
-				return;
+				return null;
 			}
 
 			const listRect = lineList.getBoundingClientRect();
@@ -537,8 +539,33 @@
 			const targetTop = rowCenter - (lineList.clientHeight / 2);
 			const maxTop = Math.max(0, lineList.scrollHeight - lineList.clientHeight);
 			const nextTop = Math.max(0, Math.min(maxTop, targetTop));
+			const requestId = ++scrollRequestId;
 
 			lineList.scrollTo({ top: nextTop, behavior });
+			return { targetTop: nextTop, requestId };
+		}
+
+		function scheduleMobileRecenter(targetTop, requestId) {
+			if (!isCoarsePointer) {
+				return;
+			}
+
+			if (mobileRecenterTimer !== null) {
+				clearTimeout(mobileRecenterTimer);
+			}
+
+			mobileRecenterTimer = window.setTimeout(() => {
+				mobileRecenterTimer = null;
+
+				if (manualScrollOverride || requestId !== scrollRequestId) {
+					return;
+				}
+
+				const delta = Math.abs(lineList.scrollTop - targetTop);
+				if (delta > 10) {
+					lineList.scrollTo({ top: targetTop, behavior: "auto" });
+				}
+			}, 260);
 		}
 
 		function focusCurrent(scrollBehavior = "smooth") {
@@ -551,11 +578,11 @@
 						row.focus();
 					}
 				}
-				centerCurrentInView(scrollBehavior);
+				const scrollResult = centerCurrentInView(scrollBehavior);
 
-				// Some mobile browsers still adjust scroll after layout changes.
-				if (isCoarsePointer) {
-					requestAnimationFrame(() => centerCurrentInView("auto"));
+				// On mobile, keep smooth scrolling and only hard-correct if browser drifts.
+				if (isCoarsePointer && scrollResult && scrollBehavior === "smooth") {
+					scheduleMobileRecenter(scrollResult.targetTop, scrollResult.requestId);
 				}
 			}
 			updateCurrentVisual();
