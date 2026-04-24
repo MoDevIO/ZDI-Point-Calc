@@ -297,6 +297,114 @@
 			color: #063024;
 		}
 
+		.finish-overlay {
+			position: fixed;
+			inset: 0;
+			z-index: 50;
+			display: grid;
+			place-items: center;
+			padding: 20px;
+			opacity: 0;
+			visibility: hidden;
+			pointer-events: none;
+			background: rgba(7, 12, 20, 0.55);
+			backdrop-filter: blur(6px);
+			transition: opacity 240ms ease, visibility 240ms ease;
+		}
+
+		.finish-overlay.active {
+			opacity: 1;
+			visibility: visible;
+			pointer-events: auto;
+		}
+
+		.confetti-layer {
+			position: absolute;
+			inset: 0;
+			overflow: hidden;
+			pointer-events: none;
+		}
+
+		.confetti-piece {
+			position: absolute;
+			top: -12vh;
+			border-radius: 2px;
+			opacity: 0.95;
+			animation: confetti-fall var(--fall, 2600ms) linear forwards;
+		}
+
+		@keyframes confetti-fall {
+			from {
+				transform: translate3d(0, -10vh, 0) rotate(0deg);
+			}
+			to {
+				transform: translate3d(var(--drift, 0px), 120vh, 0) rotate(760deg);
+			}
+		}
+
+		.finish-card {
+			position: relative;
+			z-index: 1;
+			width: min(430px, 100%);
+			text-align: center;
+			border-radius: 20px;
+			padding: 22px 18px 16px;
+			background: rgba(20, 31, 49, 0.88);
+			box-shadow:
+				0 18px 36px rgba(0, 0, 0, 0.32),
+				inset 0 1px 0 rgba(255, 255, 255, 0.07);
+			transform: translateY(26px) scale(0.95);
+			opacity: 0;
+			transition: transform 340ms cubic-bezier(0.2, 0.9, 0.25, 1), opacity 240ms ease;
+		}
+
+		.finish-overlay.active .finish-card {
+			transform: translateY(0) scale(1);
+			opacity: 1;
+		}
+
+		.finish-title {
+			font-size: 1rem;
+			font-weight: 700;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+			color: var(--muted);
+		}
+
+		.finish-score {
+			margin-top: 8px;
+			font-size: clamp(3rem, 14vw, 5.5rem);
+			font-weight: 800;
+			line-height: 0.95;
+			letter-spacing: 0.02em;
+			color: #f0f7ff;
+			text-shadow: 0 8px 26px rgba(0, 0, 0, 0.36);
+		}
+
+		.finish-label {
+			margin-top: 4px;
+			font-size: 0.96rem;
+			color: #c5d7ea;
+		}
+
+		.finish-restart {
+			margin-top: 16px;
+			border: 0;
+			border-radius: 12px;
+			padding: 11px 16px;
+			font-family: inherit;
+			font-size: 0.98rem;
+			font-weight: 800;
+			cursor: pointer;
+			color: #061a12;
+			background: linear-gradient(130deg, #5fe7b8, #3fcf9f);
+			box-shadow: 0 12px 22px rgba(20, 180, 130, 0.32);
+		}
+
+		.finish-restart:hover {
+			filter: brightness(1.04);
+		}
+
 		@media (min-width: 900px) {
 			body {
 				max-width: 920px;
@@ -337,6 +445,16 @@
 	<section class="bottom-bar" aria-label="Antwortleiste">
 		<button id="btnNo" type="button">NEIN (Space)</button>
 		<button id="btnYes" type="button">JA (Enter)</button>
+	</section>
+
+	<section id="finishOverlay" class="finish-overlay" aria-hidden="true">
+		<div id="confettiLayer" class="confetti-layer"></div>
+		<div class="finish-card" role="dialog" aria-modal="true" aria-labelledby="finishTitle">
+			<div id="finishTitle" class="finish-title">Finale Punktzahl</div>
+			<div id="finishScore" class="finish-score">0</div>
+			<div class="finish-label">Punkte</div>
+			<button id="finishRestart" class="finish-restart" type="button">Restart</button>
+		</div>
 	</section>
 
 	<script>
@@ -408,15 +526,91 @@
 		const resetAll = document.getElementById("resetAll");
 		const btnNo = document.getElementById("btnNo");
 		const btnYes = document.getElementById("btnYes");
+		const finishOverlay = document.getElementById("finishOverlay");
+		const confettiLayer = document.getElementById("confettiLayer");
+		const finishScore = document.getElementById("finishScore");
+		const finishRestart = document.getElementById("finishRestart");
 		const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
 
 		let currentIndex = 0;
 		let manualScrollOverride = false;
 		let mobileRecenterTimer = null;
 		let scrollRequestId = 0;
+		let confettiCleanupTimer = null;
 
 		function formatPoints(value) {
 			return value > 0 ? `+${value}` : `${value}`;
+		}
+
+		function clearConfetti() {
+			if (confettiCleanupTimer !== null) {
+				clearTimeout(confettiCleanupTimer);
+				confettiCleanupTimer = null;
+			}
+			confettiLayer.textContent = "";
+		}
+
+		function launchConfetti() {
+			clearConfetti();
+			const count = isCoarsePointer ? 88 : 120;
+
+			for (let i = 0; i < count; i += 1) {
+				const piece = document.createElement("div");
+				piece.className = "confetti-piece";
+				const hue = Math.floor(Math.random() * 360);
+				const width = 6 + Math.random() * 7;
+				const height = 10 + Math.random() * 11;
+				const drift = Math.round((Math.random() - 0.5) * 260);
+				const fall = 2100 + Math.random() * 1700;
+
+				piece.style.left = `${Math.random() * 100}%`;
+				piece.style.width = `${width}px`;
+				piece.style.height = `${height}px`;
+				piece.style.background = `hsl(${hue} 90% 64%)`;
+				piece.style.setProperty("--drift", `${drift}px`);
+				piece.style.setProperty("--fall", `${fall}ms`);
+				piece.style.animationDelay = `${Math.random() * 280}ms`;
+
+				confettiLayer.appendChild(piece);
+			}
+
+			confettiCleanupTimer = window.setTimeout(() => {
+				clearConfetti();
+			}, 4700);
+		}
+
+		function hideFinishOverlay() {
+			finishOverlay.classList.remove("active");
+			finishOverlay.setAttribute("aria-hidden", "true");
+			clearConfetti();
+		}
+
+		function showFinishOverlay() {
+			finishScore.textContent = netPoints.textContent || "0";
+			finishOverlay.classList.remove("active");
+			finishOverlay.setAttribute("aria-hidden", "false");
+
+			requestAnimationFrame(() => {
+				finishOverlay.classList.add("active");
+				launchConfetti();
+				try {
+					finishRestart.focus({ preventScroll: true });
+				} catch {
+					finishRestart.focus();
+				}
+			});
+		}
+
+		function resetGame() {
+			for (const item of items) {
+				item.checked = defaultSolvedIds.has(item.id);
+			}
+			touchCountInput.value = "0";
+			manualScrollOverride = false;
+			currentIndex = 0;
+			hideFinishOverlay();
+			renderList();
+			focusCurrent("auto");
 		}
 
 		function renderList() {
@@ -594,6 +788,7 @@
 		}
 
 		function setAnswer(value, moveNext = true) {
+			const isLastEntry = currentIndex === items.length - 1;
 			const current = items[currentIndex];
 			current.checked = value;
 			manualScrollOverride = false;
@@ -605,9 +800,17 @@
 			}
 
 			focusCurrent();
+
+			if (isLastEntry) {
+				showFinishOverlay();
+			}
 		}
 
 		document.addEventListener("keydown", (event) => {
+			if (finishOverlay.classList.contains("active")) {
+				return;
+			}
+
 			const active = document.activeElement;
 
 			if (active === touchCountInput) {
@@ -675,19 +878,17 @@
 		});
 
 		focusStart.addEventListener("click", () => {
+			hideFinishOverlay();
 			currentIndex = 0;
 			focusCurrent();
 		});
 
 		resetAll.addEventListener("click", () => {
-			for (const item of items) {
-				item.checked = defaultSolvedIds.has(item.id);
-			}
-			touchCountInput.value = "0";
-			manualScrollOverride = false;
-			currentIndex = 0;
-			renderList();
-			focusCurrent();
+			resetGame();
+		});
+
+		finishRestart.addEventListener("click", () => {
+			resetGame();
 		});
 
 		btnYes.addEventListener("click", () => {
