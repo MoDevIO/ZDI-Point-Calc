@@ -410,6 +410,7 @@
 		const btnYes = document.getElementById("btnYes");
 
 		let currentIndex = 0;
+		let manualScrollOverride = false;
 
 		function formatPoints(value) {
 			return value > 0 ? `+${value}` : `${value}`;
@@ -440,11 +441,13 @@
 
 				row.addEventListener("click", () => {
 					currentIndex = idx;
-					focusCurrent();
+					setAnswer(!items[idx].checked, false);
 				});
 
 				row.addEventListener("contextmenu", (event) => {
 					event.preventDefault();
+					currentIndex = idx;
+					setAnswer(false, false);
 				});
 
 				lineList.appendChild(row);
@@ -517,11 +520,33 @@
 			rowIndex.textContent = `Zeile ${currentIndex + 1}/${items.length}`;
 		}
 
-		function focusCurrent() {
+		function centerCurrentInView(behavior = "smooth") {
+			if (manualScrollOverride) {
+				return;
+			}
+
+			const row = lineList.querySelector(`.line[data-index="${currentIndex}"]`);
+			if (!row) {
+				return;
+			}
+
+			const rowCenter = row.offsetTop + row.offsetHeight / 2;
+			const targetTop = rowCenter - lineList.clientHeight / 2;
+			const maxTop = Math.max(0, lineList.scrollHeight - lineList.clientHeight);
+			const nextTop = Math.max(0, Math.min(maxTop, targetTop));
+
+			lineList.scrollTo({ top: nextTop, behavior });
+		}
+
+		function focusCurrent(scrollBehavior = "smooth") {
 			const row = lineList.querySelector(`.line[data-index="${currentIndex}"]`);
 			if (row) {
-				row.focus();
-				row.scrollIntoView({ block: "nearest" });
+				try {
+					row.focus({ preventScroll: true });
+				} catch {
+					row.focus();
+				}
+				centerCurrentInView(scrollBehavior);
 			}
 			updateCurrentVisual();
 		}
@@ -534,6 +559,7 @@
 		function setAnswer(value, moveNext = true) {
 			const current = items[currentIndex];
 			current.checked = value;
+			manualScrollOverride = false;
 
 			renderList();
 
@@ -582,6 +608,20 @@
 			}
 		});
 
+		lineList.addEventListener("wheel", () => {
+			manualScrollOverride = true;
+		}, { passive: true });
+
+		lineList.addEventListener("touchmove", () => {
+			manualScrollOverride = true;
+		}, { passive: true });
+
+		lineList.addEventListener("pointerdown", (event) => {
+			if (!(event.target instanceof Element) || !event.target.closest(".line")) {
+				manualScrollOverride = true;
+			}
+		});
+
 		touchCountInput.addEventListener("input", () => {
 			const raw = touchCountInput.value;
 			if (raw === "") {
@@ -607,6 +647,7 @@
 				item.checked = defaultSolvedIds.has(item.id);
 			}
 			touchCountInput.value = "0";
+			manualScrollOverride = false;
 			currentIndex = 0;
 			renderList();
 			focusCurrent();
@@ -621,7 +662,7 @@
 		});
 
 		renderList();
-		focusCurrent();
+		focusCurrent("auto");
 	</script>
 </body>
 </html>
