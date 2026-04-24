@@ -1,1 +1,0 @@
-# ZDI-Point-Calc

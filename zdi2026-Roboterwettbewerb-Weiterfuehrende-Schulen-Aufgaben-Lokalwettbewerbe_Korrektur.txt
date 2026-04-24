@@ -1,0 +1,940 @@
+﻿zdi-Space Adventures  
+Ruby und Schräubchen auf galaktischer Entdeckungsreise  
+ 
+Aufgaben – Robot-Game  
+Lokalwettbewerbe | weiterführende Schulen  
+ 
+ 
+ 
+ 
+Weltraumforschung und Raumfahrt – darum geht es in diesem Jahr beim zdi-Roboterwettbewerb! 
+Unter dem Motto „zdi-Space Adventures“ begeben wir uns auf eine spannende Reise ins All und 
+beschäftigen uns mit der Frage, wie Menschen den Weltraum erforschen, Satelliten nutzen und 
+fremde Himmelskörper erkunden. 
+ 
+Der Weltraum ist längst kein ferner Ort mehr, sondern Teil unseres Alltags. Satelliten helfen uns 
+bei Navigation, Kommunikation, Wettervorhersagen und der Beobachtung unseres Klimas. 
+Raumstationen dienen als Forschungslabore, in denen unter Schwerelosigkeit neue Erkenntnisse 
+für Medizin, Technik und Materialforschung gewonnen werden. Roboter übernehmen dabei eine 
+Schlüsselrolle: Sie bereiten Raketenstarts vor, steuern Missionen im All, sammeln Proben auf 
+anderen Planeten und unterstützen Menschen bei gefährlichen oder komplexen Aufgaben. 
+ 
+Auch der zdi-Roboterwettbewerb greift dieses Zukunftsthema auf. In den diesjährigen Aufgaben 
+erlebt ihr den Weg einer Raumfahrtmission Schritt für Schritt: von den Vorbereitungen auf der Erde 
+über den Einsatz von Satelliten im Orbit, Experimenten auf einer Raumstation bis hin zur 
+Erkundung eines fremden Planeten mit einem Rover. Dabei spiegeln die Aufgaben sowohl heutige 
+Raumfahrttechnologien als auch Konzepte wider, an denen aktuell geforscht wird. 
+ 
+Unsere Welt steht vor großen Herausforderungen – vom Klimawandel bis zur sicheren Nutzung 
+neuer Technologien. Die Weltraumforschung liefert wichtige Beiträge, um unseren Planeten 
+besser zu verstehen und zu schützen. Moderne Sensoren, Robotik und Künstliche Intelligenz 
+helfen dabei, Umweltveränderungen zu erkennen, Ressourcen zu schonen und neue Lösungen 
+für das Leben auf der Erde zu entwickeln. 
+ 
+Was passiert beim Start einer Rakete? Wie kommunizieren Satelliten miteinander? Wie 
+funktionieren Experimente in der Schwerelosigkeit – und wie erkundet man einen unbekannten 
+Planeten? 
+ 
+Macht mit und startet eure eigene Mission im Rahmen der zdi-Space Adventures! 
+ 
+  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 1 von 25 
+
+
+
+ 
+
+Die Aufteilung der Punkte kann der nachfolgenden Tabelle entnommen werden. Bei einigen 
+Aufgaben können Punkte für Teillösungen erreicht werden. Insgesamt gibt es damit eine Vielzahl 
+an Aufgaben, aus denen jedes Team wählen kann. 
+ 
+Überlegt Euch, womit ihr am besten anfangen und worauf ihr Euch zunächst konzentrieren 
+möchtet. Es müssen nicht alle Aufgaben gelöst werden, um am Wettbewerb teilzunehmen. Die 
+Reihenfolge, in der die Aufgaben gelöst werden, ist Euch als Team überlassen.  
+ 
+ 
+
+Aufgabe Punkte 
+
+Aufgaben auf der Erde 
+
+1) Rakete zum Start vorbereiten (3 Teilaufgaben) 79 
+
+2) Sternwarte (2 Teilaufgaben) 40  
+
+Aufgaben im Weltall 
+
+3) Mini-Satelliten und Kommunikation (3 Teilaufgaben) 63 
+
+4) Trümmerteile einsammeln (1 Teilaufgabe) 26 
+
+5) Aufbruch ins Weltall (letzte Roboteraufgabe) 27 
+
+Aufgaben auf der Raumstation 
+
+6) Umweltbeobachtung aus dem All (1 Teilaufgabe) 42  
+
+7) Experimente in Schwerelosigkeit (2 Teilaufgaben) 46 
+
+8) Transport der Rückkehrkapsel (1 Teilaufgabe) 25 
+
+Aufgaben auf einem Planeten 
+
+9) Rover zum Einsatzort bringen (1 Teilaufgabe) 35 
+
+10) Proben abholen (1 Teilaufgabe) 70 
+
+11) Landebereiche markieren (1 Teilaufgabe) 44 
+
+12) Bonuspunkte: Barrieren nicht beschädigt oder verschoben 33 
+
+Maximale Gesamtpunktzahl 530 
+
+ 
+
+Abzug von 10 Punkten für jede Roboterberührung außerhalb der Base (siehe Regelwerk 3.9) 
+Abzug von 100 Punkten für Verstöße gegen das Fairnessgebot (siehe Regelwerk 2.6.) 
+
+ 
+  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 2 von 25 
+
+
+
+ 
+
+Das Spielfeld 
+ 
+Das Thema Weltall und Weltraumforschung berührt verschiedene Bereiche, die auf dem 
+diesjährigen Spielfeld dargestellt sind. Wenn wir uns mit dem Weltraum beschäftigen, können wir 
+uns fragen, was tatsächlich im Weltraum, auf einer Raumstation, auf einem anderen Planeten 
+passiert bzw. passieren kann und welche Vorbereitungen dazu auf der Erde nötig sind.  
+ 
+Die diesjährigen Aufgaben sind daher bewusst ein Mix zwischen bereits existierenden Aktivitäten 
+und Themen, an denen gerade noch geforscht wird oder die derzeit in Planung sind. Mit den 
+Aufgaben und den begleitenden Links in den Aufgabenbeschreibungen könnt ihr tiefer in das 
+faszinierende Thema Weltraum eintauchen. Dabei haben wir konkrete Bezüge zu Einrichtungen 
+und Erlebnissen in NRW und darüber hinaus für euch aufgenommen.  
+ 
+Das Spielfeld zum zdi-Roboterwettbewerb 2026 ist hier in einer 3D-Ansicht zu sehen. Die für die 
+Aufgaben wichtigsten Bereiche sind entsprechend beschriftet.  
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 3 von 25 
+
+
+
+ 
+
+Aufgabenbeschreibung zdi-Roboterwettbewerb 2026 
+ 
+
+Aufgaben auf der Erde  
+ 
+Aufgabe 1 – Rakete zum Start vorbereiten (79 Punkte) 
+ 
+Bevor ein Raumschiff abheben kann, sind viele Arbeitsschritte nötig: Tanks müssen gefüllt, 
+Systeme überprüft und die Rakete exakt ausgerichtet werden. In Deutschland arbeiten Forschende 
+an umweltfreundlicheren Antrieben und kleineren Raketen, die präziser und sicherer starten 
+können. Auch in NRW wird im DLR Köln oder an der RWTH Aachen an neuen Materialien und 
+Testverfahren geforscht.1  
+ 
+Diese Aufgabe zeigt, wie viel Technik und Teamarbeit in einem Raketenstart stecken – lange bevor 
+der Countdown läuft. Hier werden mehrere Teilaufgaben zum Zusammenbau und der Vorbereitung 
+einer Rakete kombiniert: Vom Transport von Raketenteilen zur Startrampe bis zur Versorgung mit 
+Treibstoff und der Aktivierung der Rakete für den Start.  
+ 
+
+Bewertung:  
+ 
+Teil A – Transport der Rakete (40 Punkte) 
+Die Rakete soll vom Fertigungsort zur Startrampe transportiert werden. Idealerweise passiert 
+das mit einem Unterbau, auf den die Rakete gestellt wird. Für den Wettbewerb gilt hier 
+vereinfacht, dass Rakete und Unterbau auch unabhängig voneinander transportiert werden 
+können:  
+
+• Es gibt 15 Punkte, wenn die Rakete in Draufsicht vollständig und aufrecht stehend im 
+roten Bereich der Startrampe ist. Die blauen Seitenteile der Rakete werden hier in der 
+Draufsicht nicht berücksichtigt.  
+
+• Es gibt 15 Punkte, wenn der Unterbau in Draufsicht vollständig und aufrecht stehend im 
+roten Bereich der Startrampe ist. Die Schlinge des Unterbaus wird in der Draufsicht nicht 
+berücksichtigt. 
+
+• Es gibt weitere 10 Punkte, wenn die Rakete auf dem Unterbau aufrecht steht und beides 
+vollständig in Draufsicht im roten Bereich der Startrampe ist. (darf nicht gesteckt oder 
+anders befestigt werden). Die Bedingung des Regelwerks, dass ein Objekt in Draufsicht 
+die Matte berühren muss, entfällt hierbei für die Rakete.  
+
+ 
+Teil B – Versorgung mit Treibstoff (22 Punkte) 
+Eine Rakete benötigt sehr viel Treibstoff für den Flug von der Erde in das Weltall. Der Roboter 
+soll daher symbolisch zwei Treibstoffelemente zur Startrampe bringen. Es gibt 11 Punkte für 
+jedes Treibstoffelement, das in Draufsicht vollständig im roten Bereich der Startrampe ist. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+1 Deutsches Zentrum für Luft- und Raumfahrt / Raumflugbetrieb und Astronautentraining: 
+https://www.dlr.de/de/rb, Lehrstuhl und Institut für Luft- und Raumfahrtsysteme an der RWTH Aachen: 
+https://www.ilr.rwth-aachen.de/cms/ilr/~jmqo/Das-Institut/. Ein Start-Up aus Deutschland, welches am Start 
+von Raketen arbeitet, ist das Unternehmen Isar Aerospace (https://isaraerospace.com/).  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 4 von 25 
+
+
+
+ 
+
+Teil C – Aktivierung der Startrampe (17 Punkte)  
+Zur Aktivierung der Startrampe vor dem Flug soll ein Hebel aktiviert werden. Dazu muss dieser 
+aus einer Vorrichtung herausgezogen werden. Es gibt 17 Punkte, wenn der rote Hebel 
+herausgezogen ist, dabei die rote Markierung auf der Spielfeldmatte berührt und gleichzeitig 
+noch zum Teil in der Konstruktion verbleibt (d.h. nicht vollständig herausgezogen wird). Es ist 
+dabei nicht wichtig, ob die Schlinge den Boden berührt oder nicht, ausschlaggebend ist die 
+Berührung der roten LEGO-Stange mit dem roten Bereich. Der rote Hebel darf nicht über den 
+roten Bereich hinausgeschoben werden.  
+ 
+
+ 
+ 
+Teilaufgabe A 
+
+  
+15 Punkte, Rakete aufrecht stehend und 0 Punkte, Rakete nicht vollständig im Bereich. 
+
+vollständig in Draufsicht im Bereich. 
+
+  
+15 Punkte, Rakete aufrecht stehend und 0 Punkte, Rakete nicht aufrecht stehend. 
+
+vollständig in Draufsicht im Bereich (die Die 
+blauen Seitenteile dürfen hinausragen) 
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 5 von 25 
+
+
+
+ 
+
+  
+30 Punkte, Rakete und Unterbau vollständig und 15 Punkte, Unterbau vollständig und aufrecht 
+aufrecht stehend im Bereich (die Schlinge darf stehend im Bereich. 
+
+rausragen!). 
+
+  
+0 Punkte, Unterbau steht nicht aufrecht  0 Punkte, Unterbau nicht vollständig im Bereich 
+
+. 
+
+  
+40 Punkte. Rakete auf Unterbau, vollständig in 0 Punkte, nichts ist vollständig in Draufsicht im 
+
+Draufsicht im Bereich und aufrecht stehend. Bereich. 
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 6 von 25 
+
+
+
+ 
+
+  
+15 Punkte. Nur der Unterbau ist vollständig in 40 Punkte, auch wenn die Rakete auf der Kante 
+Draufsicht und aufrecht stehend im Bereich. steht, ist es noch OK. 
+
+ 
+ 
+Teilaufgabe B 
+
+  
+22 Punkte, beide Treibstoffobjekte sind 11 Punkte, nur eines der Treibstoffobjekte ist 
+
+vollständig im Bereich (egal wie). vollständig im Bereich (egal wie). 
+
+ 
+ 
+ 
+ 
+
+<<< 0 Punkte für die Treibstoffobjekte, da die 
+Treibstoffobjekte die Matte nicht berühren 
+
+(Regelwerk-Definition für Draufsicht im Bereich, 
+da müssen die Objekte die Matte berühren). 
+
+Für Unterbau und Rakete  
+gibt es weiterhin 40 Punkte.  
+
+ 
+
+ 
+  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 7 von 25 
+
+
+
+ 
+
+Teilaufgabe C 
+
+  
+0 Punkte, nicht weit genug herausgezogen. 17 Punkte, passend herausgezogen. 
+
+  
+0 Punkte, zu weit hinausgezogen. 0 Punkte, da der Hebel  
+
+über den roten Bereich hinausragt. 
+
+ 
+ 
+ 
+  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 8 von 25 
+
+
+
+ 
+
+Aufgabe 2 – Sternwarte (40 Punkte) 
+ 
+Der Blick in den Himmel fasziniert die Menschen seit Jahrhunderten. In Sternwarten werden 
+Sterne, Planeten und sogar ferne Galaxien beobachtet, um mehr über das Universum zu erfahren. 
+Auch in NRW, etwa an der Sternwarte Bochum2, werden echte Satellitendaten empfangen und 
+erforscht. Viele Entdeckungen, die wir heute selbstverständlich finden – zum Beispiel das Wissen 
+über unser Sonnensystem – haben ihren Ursprung in solcher Beobachtung. In diesem Kontext gibt 
+es zwei Aufgaben zu lösen: Der Transport von einem Schulbus zum symbolischen Besuch der 
+Sternwarte, das Ausrichten einer Kommunikationsantenne zum Empfang von Daten aus dem 
+Weltall.  
+ 
+
+Bewertung:  
+ 
+Teil A – Transport des Schulbusses (18 Punkte) 
+Der Schulbus soll von der Position rechts neben der Base zur Sternwarte gebracht werden. Es 
+gibt 18 Punkte, wenn der Schulbus den roten Bereich der Sternwarte berührt und aufrecht steht.  
+ 
+Teil B – Ausrichtung Erdantenne (22 Punkte) 
+Die Erdantenne soll zur Kommunikation ausgerichtet werden. Dabei gibt es folgende 
+Punktzahlen, wenn der weiße Stein des Schiebereglers am Ende den farbigen Bereich berührt: 
+
+- 22 Punkte, wenn der rote Bereich berührt wird 
+- 17 Punkte, wenn der grüne oder gelbe Bereich berührt wird. Es gibt Punkte nur für eine 
+
+Farbe. 
+ 
+Bitte hierzu auch die möglichen Zusatzpunkte in Aufgabe 3/C beachten.  
+ 
+
+ 
+ 
+ 
+Teilaufgabe A 
+
+  
+18 Punkte, Schulbus berührt den roten Bereich 18 Punkte, Schulbus vollständig im Bereich. 
+
+der Sternwarte (bitte beachten, dass nur der rote 
+Bereich und das Design innerhalb zählt). 
+
+ 
+2 Die Sternwarte Bochum (https://www.sternwarte-bochum.de/) oder auch das LWL-Museum für 
+Naturkunde mit Planetarium in Münster können einen Besuch wert sein (https://www.lwl-
+naturkundemuseum-muenster.de/de/planetarium/).  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 9 von 25 
+
+
+
+ 
+
+ 
+
+ 
+0 Punkte, Schulbus steht nicht aufrecht. 
+
+ 
+Teilaufgabe B 
+Diese Fotos gelten analog für die Bewertung der Antenne von Aufgabe 3B. 
+
+  
+17 Punkte, weißer Stein  17 Punkte, weißer Stein  
+
+berührt gelben Teil der Antenne. berührt grünen Teil der Antenne. 
+
+  
+22 Punkte, der weiße Stein berührt zwei Farben 22 Punkte, weißer Stein berührt nur den roten 
+
+(grün und rot), hier zählt die Farbe mit der Teil der Antenne. 
+höheren Punktzahl. 
+
+ 
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 10 von 25 
+
+
+
+ 
+
+ Aufgaben im Weltall  
+ 
+Aufgabe 3 – Mini-Satelliten und Kommunikation (63 Punkte) 
+ 
+Satelliten sind heute unverzichtbar: Sie liefern uns Wettervorhersagen, GPS-Navigation, 
+Internetverbindungen und Umweltdaten. Immer häufiger werden sogenannte CubeSats eingesetzt 
+– winzige, kostengünstige Satelliten, die Studierende und Forschende sogar selbst entwickeln 
+können. Auch an der Hochschule Bochum entsteht mit dem Projekt „BOsat“3 ein solcher 
+Minisatellit. Bei dieser Aufgabe zeigt ihr, wie Mini-Satelliten für Kommunikation und Forschung ins 
+All gebracht und richtig ausgerichtet werden, um wertvolle Daten zu senden. Dazu sollen zwei 
+Satelliten in einen bestimmten Bereich im Weltraum gebracht werden und analog zur Erde eine 
+Antenne zur Kommunikation aktiviert werden.  
+ 
+
+Bewertung:  
+Teilaufgabe A – Satelliten positionieren (26 Punkte) 
+Es gibt zwei Satelliten, welche von einer Rakete ausgesetzt wurden - euer Roboter soll sie richtig 
+positionieren. Pro Satelliten, welcher sich in Draufsicht vollständig innerhalb des lila 
+Satellitenbereichs befindet, gibt es 13 Punkte.  
+ 
+Teilaufgabe B – Weltallantenne ausrichten (22 Punkte) 
+Die Weltallantenne soll zur Kommunikation ausgerichtet werden. Dabei gibt es folgende 
+Punktzahlen, wenn der weiße Stein des Schiebereglers am Ende den farbigen Bereich berührt: 
+
+- 22 Punkte, wenn der rote Bereich berührt wird 
+- 17 Punkte, wenn der grüne oder gelbe Bereich berührt wird 
+
+ 
+Teilaufgabe C – Bonus für passende Kommunikation (15 Punkte) 
+Es gibt weitere 15 Punkte, wenn die Kommunikationsantenne im Weltall gleich ausgerichtet ist, 
+wie die bei der Sternwarte. Gleich bedeutet, dass beide Schieberegler den roten Bereich 
+berühren. 
+ 
+
+ 
+Teilaufgabe A 
+
+  
+13 Punkte, ein Satellit ist  13 Punkte, ein Satellit ist  
+vollständig im Bereich. vollständig im Bereich. 
+
+ 
+3 Mehr zum Satellitenbau-Projekt für Studierende unter: https://www.hochschule-bochum.de/bosat/start/.  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 11 von 25 
+
+
+
+ 
+
+  
+26 Punkte, beide Satelliten im Bereich. 26 Punkte, beide Satelliten im Bereich und 
+
+berühren diesen. 
+
+ 
+ 
+Teilaufgabe B – Siehe Fotos in Aufgabe 2. 
+ 
+ 
+Teilaufgabe C 
+Die jeweilige Situation in beiden Fotos muss für 15 Punkte in Teilaufgabe C eintreten. 
+ 
+
+  
+Antenne unten links steht auf rot. Antenne oben steht auf rot. 
+
+Beide Antennen sind gleich ausgerichtet → 15 Bonuspunkte 
+
+ 
+  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 12 von 25 
+
+
+
+ 
+
+Aufgabe 4 – Trümmerteile einsammeln (26 Punkte) 
+ 
+Im All kreisen inzwischen Tausende alte Satelliten, ausgebrannte Raketenstufen und 
+Trümmerteile – echter Weltraumschrott. Schon ein kleines Teil kann gefährlich werden, wenn es 
+mit hoher Geschwindigkeit auf aktive Satelliten trifft. Forschende und Unternehmen auf der 
+ganzen Welt suchen nach Lösungen, wie dieser Müll eingesammelt oder unschädlich gemacht 
+werden kann. Auch die “European Space Agency” arbeitet mit ihrer Mission „ClearSpace“ an 
+solchen Technologien.4 In dieser Aufgabe geht es darum, Weltraumschrott sicher einzusammeln 
+und damit für Ordnung im Orbit zu sorgen. 
+ 
+
+Bewertung:  
+Es gibt insgesamt zwei Trümmerteile, die auf den gelben Markierungen im Weltraum stehen. 
+Diese Trümmerteile müssen eingesammelt und zur Base gebracht werden. 
+ 
+Es gibt 13 Punkte pro Trümmerteil, welches sich am Ende des Laufes vollständig und in 
+Draufsicht in der Base befindet.  
+ 
+
+ 
+
+  
+26 Punkte, beide Trümmerteile in der Base. 13 Punkte, nur ein Trümmerteil in der Base. 
+
+ 
+
+ 
+26 Punkte, beide Trümmerteile in der Base (die 
+
+schwarze Umrandung gehört zur Base). 
+
+ 
+4 Mehr dazu findet ihr hier: https://www.esa.int/Space_Safety/ClearSpace-1  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 13 von 25 
+
+
+
+ 
+
+ 
+Aufgabe 5 – Aufbruch ins Weltall (27 Punkte) 
+ 
+Seit Jahrhunderten träumen Menschen davon, den Weltraum zu erforschen – und heute ist das 
+längst Wirklichkeit geworden. Raumfahrtmissionen helfen uns, mehr über das Universum zu 
+erfahren, aber auch über unsere eigene Erde. Satelliten liefern wichtige Daten über Klima, 
+Kommunikation und Navigation. Astronaut:innen erforschen, wie Menschen im All leben und 
+arbeiten können. Neue Missionen zu Mond, Mars und darüber hinaus zeigen, wie neugierig und 
+erfinderisch der Mensch ist. 
+ 
+Bei dieser Aufgabe macht sich euer Roboter auf den Weg zu einer Mission im All – symbolisch 
+verlässt er das Spielfeld, um das Unbekannte zu entdecken. Ein kleiner Schritt für euren Roboter, 
+aber ein großer für die Forschung!5 
+ 
+
+Bewertung:  
+ 
+Es gibt 27 Punkte, wenn euer Roboter zwischen den beiden Pfosten ins Weltall fährt, die 
+Spielfeldmatte verlässt und den farbigen Bereich der Spielfeldmatte nicht mehr berührt. Der 
+Roboter muss nach Verlassen der Spielfeldmatte eigenständig und spätestens 30cm nach der 
+Matte zum Stehen kommen. Sollten beim Versuch, zwischen den Pfosten herzufahren, Bälle 
+herunterfallen, gibt es nur 13 Punkte für diese Aufgabe. Dies ist die letzte Aufgabe des Roboters, 
+d.h. nachdem er von der Matte gefahren ist, darf er nicht zurückkommen, um eine andere 
+Aufgabe zu lösen. 
+ 
+(Achtet bitte darauf, dass der Roboter nicht zu weit herausfährt, um andere Teilnehmende nicht 
+zu behindern und den Roboter nicht in Gefahr zu bringen.)  
+ 
+
+ 
+
+  
+Roboter fährt zwischen den Pfosten in das 27 Punkte, der Roboter hat die Spielfeldmatte 
+
+Weltall auf dem Weg auf eine Reise. verlassen und ist nun allein im Weltall 
+unterwegs. Alles Gute, lieber Roboter. 
+
+ 
+5 Inspiriert von den Worten von Neil Armstrong, dem ersten Menschen auf dem Mond, der beim Betreten 
+sagte: „Ein kleiner Schritt für einen Menschen, ein großer Sprung für die Menschheit.“ – in dieser kurzen 
+Quarks-Episode wird darauf eingegangen, wieso seit über 50 Jahren niemand mehr auf dem Mond war: 
+https://www.youtube.com/watch?v=o3WwiIIRyBQ  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 14 von 25 
+
+
+
+ 
+
+  
+Wenn am Ende ein Ball oder beide 0 Punkte, da der Roboter den farbigen Bereich 
+
+heruntergefallen sind (ob beim Durchfahren der Spielfeldmatte noch berührt. 
+oder auch bei anderen Aufgaben/Fahrten), 
+
+gibt es nur 13 Punkte. 
+
+ 
+  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 15 von 25 
+
+
+
+ 
+
+Aufgaben auf der Raumstation  
+ 
+Aufgabe 6 – Umweltbeobachtung aus dem All (42 Punkte) 
+ 
+Wie verändern sich Wälder, Städte oder das Klima auf der Erde? Satelliten liefern jeden Tag 
+Millionen von Bildern und Messdaten, mit denen Forschende diese Fragen beantworten können. 
+In NRW wertet das Forschungszentrum Jülich solche Daten aus, um Klimamodelle zu 
+verbessern und Umweltveränderungen zu erkennen.6 Dank moderner Künstlicher Intelligenz (KI) 
+können sogar Waldbrände oder Überschwemmungen frühzeitig erkannt werden.  
+ 
+Bei dieser Aufgabe übernimmt der Roboter die Beobachtung der Erde aus der Raumstation. 
+Dazu soll der Roboter Farbklötze aus der Base in die Markierungen auf der Raumstation bringen, 
+um damit symbolisch das beobachtete Wetter der Erde anzuzeigen.  
+ 
+
+Bewertung:  
+ 
+Es gibt pro Farbklotz 14 Punkte, wenn sich dieser am Ende in Draufsicht vollständig in einem 
+der Bereiche der Wetterbereiche (blau, gelb, grün) auf der Raumstation befindet. Dabei ist egal, 
+welcher Farbklotz in welchem Bereich ist, jedoch zählt maximal ein Farbklotz pro Bereich.  
+  
+
+ 
+ 
+
+  
+42 Punkte, in jedem Bereich ist ein Farbklotz 14 Punkte, nur im grünen Bereich ist einer der 
+
+(Farbzuordnung ist egal). Farbklötze vollständig im Bereich. 
+
+ 
+6 Neben dem Forschungszentrum Jülich (https://www.fz-juelich.de/de) gibt es auch weitere europäische 
+und internationale Einrichtungen zu diesem Thema. Dazu gehören das DRL Earth Observation Center 
+(https://www.dlr.de/de/eoc/) oder die NASA Earth Science Division (https://science.nasa.gov/earth-
+science/).  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 16 von 25 
+
+
+
+ 
+
+  
+42 Punkte, in jedem Bereich ist ein Farbklotz. 28 Punkte, denn es zählt maximal ein Farbklotz 
+
+in einem der Bereiche. 
+
+ 
+ 
+Aufgabe 7 – Experimente in der Schwerelosigkeit (46 Punkte) 
+ 
+In der Schwerelosigkeit verhalten sich Flüssigkeiten, Pflanzen oder sogar der menschliche 
+Körper ganz anders als auf der Erde. Deshalb führen Astronaut:innen und Forschende an Bord 
+der ISS viele Experimente durch, um Neues über Medizin, Technik und Materialien zu lernen. 
+Dabei erforschen sie die Auswirkungen der Schwerelosigkeit auf den menschlichen Körper. Auch 
+in Köln im DLR werden solche Experimente geplant und ausgewertet.7  
+ 
+Bei dieser Aufgabe geht es darum, ein Experimentmodul zu platzieren und zu aktivieren – so wie 
+es echte Wissenschaftler:innen auch im Weltraum tun. Außerdem soll der Roboter Material für 
+Experimente von der Base, d.h. von der Erde, zur Raumstation bringen.  
+ 
+
+Bewertung:  
+ 
+Teilaufgabe A – Material zur Raumstation (26 Punkte) 
+Zwei Materialblöcke sollen von der Base zur Raumstation gebracht werden. Pro Materialblock, 
+welcher sich in Draufsicht vollständig im schwarzen Experimentbereich der Raumstation 
+befindet, gibt es 13 Punkte.  
+ 
+Teilaufgabe B – Experiment durchführen (20 Punkte) 
+Ein Experiment in der Schwerelosigkeit soll von eurem Roboter ausgelöst werden. Dazu muss 
+der Ball angestoßen werden. Es gibt 20 Punkte, wenn sich der Ball am Ende am unteren Ende 
+des Experiments befindet.  
+  
+
+ 
+  
+
+ 
+7 Mehr zum DRL in Köln unter 
+https://www.dlr.de/de/schoollab/standorte/koeln/experimente/schwerelosigkeit, auch das NASA „Research 
+in Microgravity“ Programm beschreibt, was durch Schwerelosigkeit erforscht wird: 
+https://www.nasa.gov/missions/station/iss-research/station-science-101-research-in-microgravity-higher-
+faster-longer/  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 17 von 25 
+
+
+
+ 
+
+Teilaufgabe A 
+
+  
+26 Punkte, beide Materialblöcke im Bereich. 13 Punkte, nur ein Materialblock vollständig in 
+Hinweis: Nur der schwarze Bereich gilt als Draufsicht im Bereich. 
+
+Experimentbereich, nicht das hellgraue Design 
+drum herum. 
+
+ 
+ 
+Teilaufgabe B 
+
+  
+20 Punkte, wenn der Ball am Ende im unteren 0 Punkte, sollte der Ball herausfliegen. 
+
+Bereich des Experimentaufbaus liegt. 
+
+ 
+ 
+  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 18 von 25 
+
+
+
+ 
+
+Aufgabe 8 – Transport der Rückkehrkapsel (25 Punkte) 
+ 
+Nach einer langen Mission muss alles sicher zurück zur Erde: Astronaut:innen, Proben oder 
+Forschungsergebnisse. Dafür werden spezielle Rückkehrkapseln gebaut, die beim Wiedereintritt 
+in die Erdatmosphäre großer Hitze standhalten müssen. Weltweit arbeiten Raumfahrtagenturen 
+daran, diese Systeme noch sicherer zu machen. In Köln trainieren Astronaut:innen im ESA-
+Zentrum für solche Missionen.8 Bei dieser Aufgabe sorgt euer Roboter dafür, dass eine 
+Rückkehrkapsel sicher landet – so wie es auch in der echten Raumfahrt entscheidend ist. 
+ 
+
+Bewertung:  
+ 
+Die Rückkehrkapsel muss von der Position in der Raumstation abgeholt und zur Base gebracht 
+werden. Es gibt 25 Punkte, wenn die Rückkehrkapsel am Ende unbeschadet in der Base 
+angekommen und sich vollständig in Draufsicht in der Base befindet. 
+  
+Achtet darauf, dass am Ende des Laufs die Kapsel auch in der Base liegt, nur dann kann sie 
+gewertet werden. 
+ 
+
+ 
+ 
+
+  
+25 Punkte, Rückkehrkapsel vollständig in Base. 25 Punkte, vollständig in Base (schwarze 
+
+Umrandung gehört zur Base). 
+
+ 
+8 Der deutsche Astronaut Alexander Gerst, welcher mehrere Monate auf der internationalen Raumstation 
+war, berichtet hier für die Sendung mit der Maus von seiner Arbeit als Astronaut: 
+https://www.youtube.com/watch?v=t0rauIKBINY  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 19 von 25 
+
+
+
+ 
+
+ 
+
+ 
+0 Punkte, nicht vollständig in Base. 
+
+ 
+  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 20 von 25 
+
+
+
+ 
+
+Aufgaben auf einem Planeten  
+ 
+Aufgabe 9 – Rover zum Einsatzort bringen (35 Punkte) 
+ 
+Wenn Menschen andere Himmelskörper (astronomische Objekte) wie den Mond oder den Mars 
+erforschen wollen, sind Roboter die Vorreiter. Sie können Proben nehmen, Gelände erforschen 
+und Daten zur Erde schicken, ohne dass Menschen bei dem Einsatz gefährdet werden.  
+ 
+In Köln wird im ESA-Testgelände LUNA bereits geübt, wie Rover sich auf sandigem Boden 
+bewegen oder Aufgaben eigenständig lösen können.9 Ein bekannter Rover ist der “Perseverance 
+Rover”, welcher seit 2020 über den Mars fährt und seitdem beeindruckende Eindrücke eines fernen 
+Planeten zur Erde übermittelt.10 
+ 
+Bei dieser Aufgabe platziert euer Roboter einen Rover auf einem fremden Planeten – ein wichtiger 
+Schritt für zukünftige Missionen. 
+ 
+
+Bewertung:  
+ 
+Es gibt 35 Punkte, wenn der Rover in Draufsicht vollständig und aufrecht stehend im 
+dunkelblauen Bereich für den Rover auf dem Planeten steht. 
+ 
+
+ 
+
+  
+35 Punkte, Rover vollständig und aufrecht 0 Punkte, Rover nicht vollständig im Bereich. 
+
+stehend im Bereich. 
+
+ 
+9 Mehr Informationen zum LUNA-Testgelände: 
+https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Exploration/Luna.  
+10 Die NASA stellt immer wieder Fotos, Videos und Ergebnisse des Marsrovers öffentlich. Ein Blick auf die 
+Website mit den dort verlinkten Videos lohnt sich: https://science.nasa.gov/mission/mars-2020-
+perseverance/  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 21 von 25 
+
+
+
+ 
+
+ 
+
+ 
+0 Punkte, Rover nicht aufrecht stehend. 
+
+ 
+ 
+ 
+Aufgabe 10 – Proben abholen (70 Punkte) 
+ 
+Die Analyse von Gesteinsproben verrät viel über den Ursprung von Planeten und das 
+Sonnensystem. Forschende der Universität Münster untersuchen echte Meteoriten, um daraus 
+mehr über das All zu erfahren.11 Weltweit werden Missionen vorbereitet, bei denen Roboter 
+Bodenproben vom Mars oder Asteroiden zur Erde bringen.  
+ 
+In dieser Aufgabe zeigt euer Roboter, wie eine sichere Probenentnahme und Rückführung 
+ablaufen kann – ganz wie bei echten Weltraummissionen. Auf dem Planeten stehen dazu zwei 
+Proben, die zur Base gebracht werden müssen. Dazu muss der Roboter den Weg durch 
+unwegsames Terrain schaffen.  
+ 
+
+Bewertung:  
+ 
+Es gibt 35 Punkte pro Probe, welche erfolgreich vom Planeten auf die Erde transportiert wurde. 
+Dazu muss sich die Probe am Ende in Draufsicht vollständig in der Base befinden. 
+ 
+Achtet darauf, dass am Ende des Laufs die Proben auch in der Base liegen, nur dann können 
+sie gewertet werden. 
+ 
+
+ 
+
+ 
+11 Zur Forschung an der Universität Münster: https://www.uni-muenster.de/Planetology/ifp/home.html  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 22 von 25 
+
+
+
+ 
+
+  
+70 Punkte, beide Proben vollständig in der Base. 35 Punkte, nur eine Probe  
+
+vollständig in der Base. 
+
+ 
+ 
+ 
+ 
+ 
+
+<< 70 Punkte, beide Proben vollständig in der 
+Base (die schwarze Umrandung gehört zur 
+
+Base). 
+
+ 
+
+ 
+ 
+ 
+  
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 23 von 25 
+
+
+
+ 
+
+Aufgabe 11 – Landebereiche markieren (44 Punkte) 
+ 
+Bevor ein Raumschiff oder eine Landeeinheit sicher landen kann, müssen der Untergrund 
+untersucht und der Bereich markiert werden.  
+ 
+Das ist besonders auf fremden Himmelskörpern wichtig, wo Staub, Felsen oder Krater gefährlich 
+werden können. Weltweit gibt es verschiedene Ideen für Kolonien auf dem Mond oder Mars, 
+welche auch das Landen von mehreren Raumschiffen dort nötig machen wird.12 
+ 
+In dieser Aufgabe hilft euer Roboter mit, einen sicheren Landeplatz zu markieren – wie bei echten 
+Missionen zum Mond oder Mars. 
+ 
+
+Bewertung:  
+ 
+Es gibt 11 Punkte pro Markierungsblock, welcher am Ende in Draufsicht vollständig innerhalb 
+eines hellgrünen Landebereiches ist. Es zählt maximal ein Markierungsblock pro Bereich. 
+ 
+Dabei ist es egal ob die Markierungsblöcke liegen oder stehen. 
+ 
+
+ 
+
+  
+44 Punkte, in jedem grünen Bereich ist ein 22 Punkte, zwei Blöcke gelten als vollständig 
+Markierungsblock vollständig im Bereich. im Bereich (pro Bereich zählt max. ein Block). 
+
+ 
+ 
+  
+
+ 
+12 Die „Artemis“-Mission der NASA soll einen Besuch auf dem Mond vorbereiten: 
+https://www.nasa.gov/humans-in-space/artemis/, die amerikanische Firma SpaceX blickt zum Mars und 
+testet dafür derzeit ihre „Starship“-Raketen: https://www.spacex.com/humanspaceflight/mars   
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 24 von 25 
+
+
+
+ 
+
+Aufgabe 12 – Bonuspunkte für Barrieren (33 Punkte) 
+ 
+Auf dem Spielfeld gibt es drei Barrieren, für die es Bonuspunkte gibt. Eine oberhalb der Base und 
+zwei neben dem Terrain auf dem Planten. Die Barrieren werden mit Klettband auf der Matte 
+festgeklebt und dürfen nicht verschoben oder beschädigt werden. 
+ 
+
+Bewertung:  
+ 
+Es gibt 11 Punkte pro Barriere, welche am Ende noch genauso auf dem Spielfeld steht wie zu 
+Beginn des Roboterlaufs. Beschädigt oder verschiebt der Roboter eine Barriere, werden die 
+Punkte nicht gegeben. Jedes Team startet daher bereits mit 33 Punkten und kann diese nur 
+verlieren, wenn die Barriere verschoben oder beschädigt wird.  
+ 
+Achtung, diese Objekte dürfen, wenn der Roboter sie verschoben hat, nicht von der 
+Spielfeldmatte entfernt werden. 
+ 
+
+ 
+
+  
+Beispiel für eine beschädigte Barriere, hierfür gibt 11 Punkte für die Barriere oberhalb der Base 
+
+es dann keine Bonuspunkte.  
+
+ 
+
+ 
+11 Punkte für die Barriere neben der Base 
+
+ 
+
+ Aufgabendokument für weiterführende Schulen | Lokalwettbewerb | Seite 25 von 25
