@@ -6,15 +6,18 @@
 	<title>ZDI Point Calc 2026</title>
 	<style>
 		:root {
-			--bg: #0d1f30;
-			--bg-soft: #132a40;
-			--ink: #eaf4ff;
-			--muted: #9bb6cb;
-			--ok: #2ed39a;
-			--no: #ff6464;
-			--warn: #ff7a7a;
-			--focus: #ffd074;
-			--line: #29445d;
+			--bg: #090f1a;
+			--bg-soft: #0f1828;
+			--surface: #182337;
+			--surface-2: #141f31;
+			--ink: #eef4ff;
+			--muted: #a2b3c9;
+			--ok: #43d4a8;
+			--no: #f27474;
+			--warn: #ff8c8c;
+			--accent: #8ccfff;
+			--ring: rgba(140, 207, 255, 0.42);
+			--line: rgba(255, 255, 255, 0.08);
 		}
 
 		* {
@@ -32,18 +35,35 @@
 			display: grid;
 			grid-template-rows: auto minmax(0, 1fr) auto;
 			height: 100dvh;
+			position: relative;
+			isolation: isolate;
 			color: var(--ink);
 			color-scheme: dark;
 			font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
-			background: linear-gradient(180deg, #091728, #0d2236 45%, #13324b);
+			background: #0a111d;
+		}
+
+		body::before {
+			content: "";
+			position: fixed;
+			inset: -20%;
+			pointer-events: none;
+			z-index: -1;
+			background:
+				radial-gradient(38% 42% at 14% 9%, rgba(126, 170, 255, 0.2), transparent 72%),
+				radial-gradient(30% 34% at 86% 78%, rgba(110, 230, 190, 0.12), transparent 68%),
+				radial-gradient(34% 38% at 66% 24%, rgba(230, 170, 255, 0.1), transparent 72%);
+			filter: blur(14px);
 		}
 
 		.top-bar {
 			padding: calc(8px + env(safe-area-inset-top)) 10px 8px;
-			border-bottom: 1px solid var(--line);
-			background: var(--bg-soft);
+			background: rgba(15, 24, 40, 0.74);
+			backdrop-filter: blur(10px);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 			display: grid;
 			gap: 6px;
+			box-shadow: 0 6px 18px rgba(2, 8, 16, 0.25);
 		}
 
 		.top-row {
@@ -73,6 +93,12 @@
 			color: var(--muted);
 		}
 
+		.stats span {
+			background: rgba(24, 35, 55, 0.68);
+			border-radius: 999px;
+			padding: 3px 8px;
+		}
+
 		.stats b {
 			color: var(--ink);
 		}
@@ -93,37 +119,49 @@
 			width: 78px;
 			margin-left: 6px;
 			border-radius: 8px;
-			border: 1px solid #355672;
-			background: #0d2132;
+			border: 0;
+			background: rgba(20, 31, 49, 0.88);
 			color: var(--ink);
 			padding: 6px 8px;
 			font-size: 0.95rem;
 			font-family: "IBM Plex Mono", "Consolas", monospace;
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 		}
 
 		.action {
-			border: 1px solid #355672;
-			border-radius: 8px;
+			border: 0;
+			border-radius: 10px;
 			padding: 6px 9px;
 			cursor: pointer;
 			font-weight: 700;
 			font-family: inherit;
-			background: #143148;
+			background: rgba(22, 34, 54, 0.86);
 			color: var(--ink);
+			transition: background-color 120ms ease, transform 120ms ease;
+		}
+
+		.action:hover {
+			background: rgba(33, 49, 74, 0.94);
+			transform: translateY(-1px);
 		}
 
 		.controls input:focus-visible,
 		.action:focus-visible,
 		.bottom-bar button:focus-visible,
-		.line.current {
-			outline: 3px solid color-mix(in srgb, var(--focus) 45%, transparent);
-			outline-offset: 1px;
+		.line:focus-visible {
+			outline: none;
+			box-shadow:
+				0 0 0 1.5px var(--ring),
+				0 0 0 5px rgba(140, 207, 255, 0.1);
 		}
 
 		.auto-bonus {
 			font-size: 0.8rem;
 			line-height: 1.35;
 			color: #b5d1e6;
+			border-radius: 10px;
+			background: rgba(22, 34, 54, 0.62);
+			padding: 6px 8px;
 		}
 
 		.line-list {
@@ -135,7 +173,22 @@
 			gap: 6px;
 			overflow-y: auto;
 			overflow-x: hidden;
-			background: var(--bg);
+			background: transparent;
+			scrollbar-width: thin;
+			scrollbar-color: #3f6284 transparent;
+		}
+
+		.line-list::-webkit-scrollbar {
+			width: 8px;
+		}
+
+		.line-list::-webkit-scrollbar-track {
+			background: transparent;
+		}
+
+		.line-list::-webkit-scrollbar-thumb {
+			background: #3b6484;
+			border-radius: 999px;
 		}
 
 		.line {
@@ -143,30 +196,33 @@
 			grid-template-columns: 68px 1fr auto;
 			align-items: center;
 			gap: 8px;
-			border: 1px solid #2b4660;
-			border-radius: 8px;
-			background: #10253a;
+			border: 0;
+			border-radius: 12px;
+			background: rgba(20, 31, 49, 0.72);
 			padding: 9px;
 			cursor: pointer;
 			user-select: none;
+			box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+			backdrop-filter: blur(3px);
 		}
 
-		.line:focus-visible {
-			outline: 3px solid color-mix(in srgb, var(--focus) 45%, transparent);
-			outline-offset: 1px;
+		.line.current {
+			background: rgba(27, 43, 66, 0.86);
+			box-shadow:
+				0 0 0 1px rgba(140, 207, 255, 0.16),
+				0 10px 20px rgba(0, 0, 0, 0.22);
 		}
 
 		.state {
 			text-align: center;
 			border-radius: 999px;
-			border: 1px solid #40627c;
 			padding: 4px 8px;
 			font-size: 0.74rem;
 			font-weight: 800;
 			letter-spacing: 0.04em;
 			text-transform: uppercase;
-			color: #a7c0d5;
-			background: #1b334a;
+			color: #afc6dd;
+			background: rgba(34, 51, 74, 0.84);
 		}
 
 		.state.ok {
@@ -183,7 +239,7 @@
 
 		.line-title {
 			font-size: 0.9rem;
-			line-height: 1.3;
+			line-height: 1.35;
 			color: #deefff;
 		}
 
@@ -205,27 +261,39 @@
 			grid-template-columns: 1fr 1fr;
 			gap: 8px;
 			padding: 8px max(8px, env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-right));
-			border-top: 1px solid var(--line);
-			background: var(--bg-soft);
+			background: rgba(15, 24, 40, 0.76);
+			backdrop-filter: blur(10px);
+			border-top: 1px solid rgba(255, 255, 255, 0.04);
+			box-shadow: 0 -6px 18px rgba(2, 8, 16, 0.25);
 		}
 
 		.bottom-bar button {
 			border: 0;
-			border-radius: 8px;
+			border-radius: 10px;
 			padding: 12px 10px;
 			font-family: inherit;
 			font-size: 1rem;
 			font-weight: 800;
 			cursor: pointer;
+			transition: filter 120ms ease, transform 120ms ease;
+		}
+
+		.bottom-bar button:hover {
+			filter: brightness(1.05);
+			transform: translateY(-1px);
+		}
+
+		.bottom-bar button:active {
+			filter: brightness(0.95);
 		}
 
 		#btnNo {
-			background: color-mix(in srgb, var(--no) 78%, #1f3041);
+			background: var(--no);
 			color: #340708;
 		}
 
 		#btnYes {
-			background: color-mix(in srgb, var(--ok) 78%, #1f3041);
+			background: var(--ok);
 			color: #063024;
 		}
 
@@ -233,8 +301,7 @@
 			body {
 				max-width: 920px;
 				margin: 0 auto;
-				border-left: 1px solid var(--line);
-				border-right: 1px solid var(--line);
+				box-shadow: 0 0 0 1px var(--line);
 			}
 		}
 	</style>
@@ -273,6 +340,12 @@
 	</section>
 
 	<script>
+		const defaultSolvedIds = new Set([
+			"12_BARRIER_BASE",
+			"12_BARRIER_A",
+			"12_BARRIER_B"
+		]);
+
 		const items = [
 			{ id: "1A_ROCKET", label: "1A Rakete vollständig/aufrecht im roten Bereich der Startrampe", points: 15 },
 			{ id: "1A_BASE", label: "1A Unterbau vollständig/aufrecht im roten Bereich der Startrampe", points: 15 },
@@ -320,7 +393,7 @@
 			{ id: "12_BARRIER_B", label: "12 Barriere neben Terrain B nicht verschoben/beschädigt", points: 11 },
 
 			{ id: "PENALTY_FAIR", label: "Verstoß gegen Fairnessgebot (Abzug 100)", points: -100 }
-		].map((item) => ({ ...item, checked: false }));
+		].map((item) => ({ ...item, checked: defaultSolvedIds.has(item.id) }));
 
 		const lineList = document.getElementById("lineList");
 		const rowIndex = document.getElementById("rowIndex");
@@ -531,7 +604,7 @@
 
 		resetAll.addEventListener("click", () => {
 			for (const item of items) {
-				item.checked = false;
+				item.checked = defaultSolvedIds.has(item.id);
 			}
 			touchCountInput.value = "0";
 			currentIndex = 0;
