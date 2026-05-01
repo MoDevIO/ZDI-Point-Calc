@@ -1,1057 +1,909 @@
-<!doctype html>
-<html lang="de">
+<!DOCTYPE html>
+<html lang="de" class="dark">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>ZDI Point Calc 2026</title>
-	<style>
-		:root {
-			--bg: #090f1a;
-			--bg-soft: #0f1828;
-			--surface: #182337;
-			--surface-2: #141f31;
-			--ink: #eef4ff;
-			--muted: #a2b3c9;
-			--ok: #43d4a8;
-			--no: #f27474;
-			--warn: #ff8c8c;
-			--accent: #8ccfff;
-			--ring: rgba(140, 207, 255, 0.42);
-			--line: rgba(255, 255, 255, 0.08);
-		}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZDI Point Calc 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --background: #09090b;
+      --foreground: #fafafa;
+      --card: #09090b;
+      --card-foreground: #fafafa;
+      --popover: #09090b;
+      --popover-foreground: #fafafa;
+      --primary: #fafafa;
+      --primary-foreground: #18181b;
+      --secondary: #27272a;
+      --secondary-foreground: #fafafa;
+      --muted: #27272a;
+      --muted-foreground: #a1a1aa;
+      --accent: #27272a;
+      --accent-foreground: #fafafa;
+      --destructive: #7f1d1d;
+      --destructive-foreground: #fafafa;
+      --border: #27272a;
+      --input: #27272a;
+      --ring: #d4d4d8;
+      --radius: 0.5rem;
+    }
 
-		/*Prevent doubbleclick to zoom on iOS*/
-		button {
-			touch-action: manipulation;
-		}
+    * {
+      box-sizing: border-box;
+    }
 
-		* {
-			box-sizing: border-box;
-		}
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
 
-		html,
-		body {
-			margin: 0;
-			height: 100%;
-			overflow: hidden;
-		}
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
 
-		body {
-			display: grid;
-			grid-template-rows: auto minmax(0, 1fr) auto;
-			height: 100dvh;
-			position: relative;
-			isolation: isolate;
-			color: var(--ink);
-			color-scheme: dark;
-			font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
-			background: #0a111d;
-		}
+    /* Header / Score Board */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width: 100%;
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 9, 11, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+    }
 
-		body::before {
-			content: "";
-			position: fixed;
-			inset: -20%;
-			pointer-events: none;
-			z-index: -1;
-			background:
-				radial-gradient(38% 42% at 14% 9%, rgba(126, 170, 255, 0.2), transparent 72%),
-				radial-gradient(30% 34% at 86% 78%, rgba(110, 230, 190, 0.12), transparent 68%),
-				radial-gradient(34% 38% at 66% 24%, rgba(230, 170, 255, 0.1), transparent 72%);
-			filter: blur(14px);
-		}
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
 
-		.top-bar {
-			padding: calc(8px + env(safe-area-inset-top)) 10px 8px;
-			background: rgba(15, 24, 40, 0.74);
-			backdrop-filter: blur(10px);
-			border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-			display: grid;
-			gap: 6px;
-			box-shadow: 0 6px 18px rgba(2, 8, 16, 0.25);
-		}
+    .score-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
 
-		.top-row {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			gap: 10px;
-			flex-wrap: wrap;
-		}
+    .score-main {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      display: inline-block;
+    }
 
-		.score-big {
-			font-size: clamp(1.2rem, 3.5vw, 1.7rem);
-			font-weight: 800;
-			line-height: 1;
-			transition:
-				left 880ms cubic-bezier(0.2, 0.9, 0.22, 1),
-				top 880ms cubic-bezier(0.2, 0.9, 0.22, 1),
-				transform 880ms cubic-bezier(0.2, 0.9, 0.22, 1),
-				width 880ms cubic-bezier(0.2, 0.9, 0.22, 1),
-				font-size 880ms cubic-bezier(0.2, 0.9, 0.22, 1),
-				color 320ms ease,
-				text-shadow 320ms ease;
-			transform-origin: center center;
-		}
+    .pop-animation {
+      animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); color: var(--primary); }
+      100% { transform: scale(1); }
+    }
 
-		#scoreWrap {
-			will-change: left, top, transform, width, font-size;
-			backface-visibility: hidden;
-		}
+    .card.status-red {
+      border-color: #ef4444 !important; /* solid red */
+      background-color: rgba(239, 68, 68, 0.08) !important;
+    }
+    .card.status-yellow {
+      border-color: #eab308 !important; /* solid yellow */
+      background-color: rgba(234, 179, 8, 0.08) !important;
+    }
+    .card.status-green {
+      border-color: #22c55e !important; /* solid green */
+      background-color: rgba(34, 197, 94, 0.08) !important;
+    }
 
-		#scoreWrap.score-centered {
-			left: 50% !important;
-			top: 50% !important;
-			transform: translate(-50%, -50%) !important;
-			width: min(92vw, 760px) !important;
-			font-size: clamp(3.2rem, 17vw, 8.4rem);
-			color: #f4f9ff;
-			text-align: center;
-			text-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
-		}
+    .score-details {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
 
-		@keyframes score-center-pulse {
-			0%,
-			100% {
-				transform: translate(-50%, -50%) scale(1);
-			}
-			50% {
-				transform: translate(-50%, -50%) scale(1.2);
-			}
-		}
+    .score-details strong {
+      font-weight: 600;
+    }
 
-		#scoreWrap.score-pulse {
-			animation: score-center-pulse 340ms cubic-bezier(0.2, 0.9, 0.25, 1) 1;
-		}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      font-weight: 500;
+      height: 2.5rem;
+      padding: 0 1.25rem;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+      font-family: inherit;
+    }
 
-		.score-prefix,
-		.score-total {
-			color: var(--muted);
-			font-weight: 700;
-			font-size: 0.9em;
-		}
+    .btn-secondary {
+      background-color: var(--secondary);
+      color: var(--secondary-foreground);
+      border: 1px solid transparent;
+    }
 
-		.row-index {
-			font-size: 0.86rem;
-			color: var(--muted);
-			transition: opacity 320ms ease, transform 320ms ease, filter 320ms ease;
-		}
+    .btn-secondary:hover {
+      background-color: rgba(39, 39, 42, 0.8);
+    }
 
-		.stats {
-			display: flex;
-			gap: 10px;
-			flex-wrap: wrap;
-			font-size: 0.88rem;
-			color: var(--muted);
-			transition: opacity 320ms ease, transform 320ms ease, filter 320ms ease;
-		}
+    /* Cards */
+    #tasksContainer {
+      column-count: 1;
+      column-gap: 1.5rem;
+    }
 
-		.stats span {
-			background: rgba(24, 35, 55, 0.68);
-			border-radius: 999px;
-			padding: 3px 8px;
-		}
+    @media (min-width: 768px) {
+      #tasksContainer {
+        column-count: 2;
+      }
+    }
 
-		.stats b {
-			color: var(--ink);
-		}
+    @media (min-width: 1200px) {
+      #tasksContainer {
+        column-count: 3;
+      }
+    }
 
-		.controls {
-			display: flex;
-			gap: 8px;
-			align-items: center;
-			flex-wrap: wrap;
-			transition: opacity 320ms ease, transform 320ms ease, filter 320ms ease;
-		}
+    .card {
+      background-color: var(--card);
+      color: var(--card-foreground);
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) + 0.25rem);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      break-inside: avoid;
+      display: inline-block;
+      width: 100%;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
 
-		.controls label {
-			font-size: 0.88rem;
-			color: var(--muted);
-		}
+    .card-header {
+      padding: 1.5rem;
+      padding-bottom: 0.75rem;
+    }
 
-		.controls input {
-			width: 78px;
-			margin-left: 6px;
-			border-radius: 8px;
-			border: 0;
-			background: rgba(20, 31, 49, 0.88);
-			color: var(--ink);
-			padding: 6px 8px;
-			font-size: 0.95rem;
-			font-family: "IBM Plex Mono", "Consolas", monospace;
-			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
-		}
+    .card-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin: 0;
+    }
 
-		.action {
-			border: 0;
-			border-radius: 10px;
-			padding: 6px 9px;
-			cursor: pointer;
-			font-weight: 700;
-			font-family: inherit;
-			background: rgba(22, 34, 54, 0.86);
-			color: var(--ink);
-			transition: background-color 120ms ease, transform 120ms ease;
-		}
+    .card-content {
+      padding: 1.5rem;
+      padding-top: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
 
-		.action:hover {
-			background: rgba(33, 49, 74, 0.94);
-			transform: translateY(-1px);
-		}
+    /* Forms */
+    .form-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      position: relative;
+    }
 
-		.controls input:focus-visible,
-		.action:focus-visible,
-		.bottom-bar button:focus-visible,
-		.line:focus-visible {
-			outline: none;
-			box-shadow:
-				0 0 0 1.5px var(--ring),
-				0 0 0 5px rgba(140, 207, 255, 0.1);
-		}
+    .native-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
 
-		.auto-bonus {
-			font-size: 0.8rem;
-			line-height: 1.35;
-			color: #b5d1e6;
-			border-radius: 10px;
-			background: rgba(22, 34, 54, 0.62);
-			padding: 6px 8px;
-			transition: opacity 320ms ease, transform 320ms ease, filter 320ms ease;
-		}
+    .native-hidden:focus-visible + .control-indicator {
+      outline: 2px solid var(--ring);
+      outline-offset: 2px;
+    }
 
-		.line-list {
-			min-height: 0;
-			margin: 0;
-			padding: 8px;
-			list-style: none;
-			display: grid;
-			gap: 6px;
-			overflow-y: auto;
-			overflow-x: hidden;
-			background: transparent;
-			scrollbar-width: thin;
-			scrollbar-color: #3f6284 transparent;
-			transition: opacity 360ms ease, transform 360ms ease, filter 360ms ease;
-		}
+    .control-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      background-color: transparent;
+      transition: all 0.2s;
+      margin-top: 0.125rem;
+    }
 
-		.line-list::-webkit-scrollbar {
-			width: 8px;
-		}
+    /* Checkbox */
+    .checkbox-indicator {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 0.25rem;
+    }
+    .native-hidden:checked + .checkbox-indicator {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      color: var(--primary-foreground);
+    }
+    .native-hidden:checked + .checkbox-indicator svg {
+      display: block;
+    }
+    .checkbox-indicator svg {
+      display: none;
+      width: 0.875rem;
+      height: 0.875rem;
+      stroke: currentColor;
+      stroke-width: 3;
+    }
 
-		.line-list::-webkit-scrollbar-track {
-			background: transparent;
-		}
+    /* Radio */
+    .radio-indicator {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 9999px;
+    }
+    .native-hidden:checked + .radio-indicator {
+      border-color: var(--primary);
+    }
+    .native-hidden:checked + .radio-indicator::after {
+      content: '';
+      width: 0.625rem;
+      height: 0.625rem;
+      background-color: var(--primary);
+      border-radius: 9999px;
+    }
 
-		.line-list::-webkit-scrollbar-thumb {
-			background: #3b6484;
-			border-radius: 999px;
-		}
+    .label-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      flex-grow: 1;
+    }
 
-		.line {
-			display: grid;
-			grid-template-columns: 68px 1fr auto;
-			align-items: center;
-			gap: 8px;
-			border: 0;
-			border-radius: 12px;
-			background: rgba(20, 31, 49, 0.72);
-			padding: 9px;
-			cursor: pointer;
-			user-select: none;
-			box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
-			backdrop-filter: blur(3px);
-		}
+    .label-title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 1.25rem;
+      user-select: none;
+    }
 
-		.line.current {
-			background: rgba(27, 43, 66, 0.86);
-			box-shadow:
-				0 0 0 1px rgba(140, 207, 255, 0.16),
-				0 10px 20px rgba(0, 0, 0, 0.22);
-		}
+    .points-badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 9999px;
+      border: 1px solid transparent;
+      background-color: var(--secondary);
+      color: var(--secondary-foreground);
+      padding: 0.05rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      width: max-content;
+    }
 
-		.state {
-			text-align: center;
-			border-radius: 999px;
-			padding: 4px 8px;
-			font-size: 0.74rem;
-			font-weight: 800;
-			letter-spacing: 0.04em;
-			text-transform: uppercase;
-			color: #afc6dd;
-			background: rgba(34, 51, 74, 0.84);
-		}
+    .points-badge.positive {
+      color: #4ade80;
+      background-color: rgba(74, 222, 128, 0.1);
+    }
+    .points-badge.negative {
+      color: #f87171;
+      background-color: rgba(248, 113, 113, 0.1);
+    }
 
-		.state.ok {
-			border-color: color-mix(in srgb, var(--ok) 58%, #1a3144);
-			color: #051f18;
-			background: color-mix(in srgb, var(--ok) 80%, #1a3144);
-		}
+    .input-number {
+      display: flex;
+      height: 2.5rem;
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--input);
+      background-color: transparent;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      color: var(--foreground);
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .input-number:focus-visible {
+      outline: none;
+      border-color: var(--ring);
+    }
 
-		.state.no {
-			border-color: color-mix(in srgb, var(--no) 55%, #1a3144);
-			color: #2f0303;
-			background: color-mix(in srgb, var(--no) 72%, #1a3144);
-		}
+    .stepper {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.25rem;
+    }
+    .stepper-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background-color: transparent;
+      color: var(--foreground);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .stepper-btn:hover {
+      background-color: var(--secondary);
+    }
+    .stepper-btn:active {
+      transform: scale(0.96);
+    }
+    .stepper-value {
+      font-size: 1.125rem;
+      font-weight: 600;
+      min-width: 2rem;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
 
-		.line-title {
-			font-size: 0.9rem;
-			line-height: 1.35;
-			color: #deefff;
-		}
+    .auto-bonus-banner {
+      background-color: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      color: #93c5fd;
+      padding: 1rem;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
 
-		.line-points {
-			font-weight: 800;
-			font-size: 0.88rem;
-			color: #8dd6ff;
-			min-width: 50px;
-			text-align: right;
-			font-family: "IBM Plex Mono", "Consolas", monospace;
-		}
+    /* Layout Utilities */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    @media (min-width: 640px) {
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
 
-		.line-points.minus {
-			color: var(--warn);
-		}
+    .flex-col { display: flex; flex-direction: column; }
+    .gap-4 { gap: 1rem; }
+    .mt-4 { margin-top: 1rem; }
 
-		.bottom-bar {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: 8px;
-			padding: 8px max(8px, env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-right));
-			background: rgba(15, 24, 40, 0.76);
-			backdrop-filter: blur(10px);
-			border-top: 1px solid rgba(255, 255, 255, 0.04);
-			box-shadow: 0 -6px 18px rgba(2, 8, 16, 0.25);
-			transition: opacity 320ms ease, transform 320ms ease, filter 320ms ease;
-		}
-
-		.bottom-bar button {
-			border: 0;
-			border-radius: 10px;
-			padding: 12px 10px;
-			font-family: inherit;
-			font-size: 1rem;
-			font-weight: 800;
-			cursor: pointer;
-			transition: filter 120ms ease, transform 120ms ease;
-		}
-
-		.bottom-bar button:hover {
-			filter: brightness(1.05);
-			transform: translateY(-1px);
-		}
-
-		.bottom-bar button:active {
-			filter: brightness(0.95);
-		}
-
-		#btnNo {
-			background: var(--no);
-			color: #340708;
-		}
-
-		#btnYes {
-			background: var(--ok);
-			color: #063024;
-		}
-
-		.finish-overlay {
-			position: fixed;
-			inset: 0;
-			z-index: 50;
-			display: block;
-			padding: 20px;
-			opacity: 0;
-			visibility: hidden;
-			pointer-events: none;
-			background: rgba(7, 12, 20, 0.55);
-			backdrop-filter: blur(6px);
-			transition: opacity 240ms ease, visibility 240ms ease;
-		}
-
-		.finish-overlay.active {
-			opacity: 1;
-			visibility: visible;
-			pointer-events: auto;
-		}
-
-		.confetti-layer {
-			position: absolute;
-			inset: 0;
-			overflow: hidden;
-			pointer-events: none;
-		}
-
-		.confetti-piece {
-			position: absolute;
-			top: -12vh;
-			border-radius: 2px;
-			opacity: 0;
-			will-change: transform, opacity;
-			animation: confetti-fall var(--fall, 2600ms) cubic-bezier(0.18, 0.72, 0.24, 1) forwards;
-		}
-
-		@keyframes confetti-fall {
-			from {
-				transform: translate3d(0, -12vh, 0) rotate(0deg) scale(0.9);
-				opacity: 0;
-			}
-			10% {
-				opacity: var(--alpha, 0.9);
-			}
-			68% {
-				transform: translate3d(calc(var(--drift-end, 0px) * 0.68), 78vh, 0) rotate(calc(var(--twirl-end, 720deg) * 0.68));
-				opacity: var(--alpha, 0.9);
-			}
-			to {
-				transform: translate3d(var(--drift-end, 0px), 122vh, 0) rotate(var(--twirl-end, 720deg));
-				opacity: 0;
-			}
-		}
-
-		.celebration-actions {
-			position: fixed;
-			left: 50%;
-			top: 50%;
-			z-index: 65;
-			transform: translate(-50%, clamp(88px, 18vw, 150px));
-			opacity: 0;
-			transition: opacity 260ms ease, transform 360ms cubic-bezier(0.2, 0.85, 0.3, 1);
-		}
-
-		.finish-overlay.active .celebration-actions {
-			opacity: 1;
-			transform: translate(-50%, clamp(100px, 20vw, 170px));
-		}
-
-		.finish-restart {
-			margin-top: 16px;
-			border: 0;
-			border-radius: 12px;
-			padding: 11px 16px;
-			font-family: inherit;
-			font-size: 0.98rem;
-			font-weight: 800;
-			cursor: pointer;
-			color: #061a12;
-			background: linear-gradient(130deg, #5fe7b8, #3fcf9f);
-			box-shadow: 0 12px 22px rgba(20, 180, 130, 0.32);
-		}
-
-		.finish-restart:hover {
-			filter: brightness(1.04);
-		}
-
-		.celebrating .top-bar {
-			background: transparent;
-			border-bottom-color: transparent;
-			box-shadow: none;
-			backdrop-filter: none;
-			pointer-events: none;
-		}
-
-		.celebrating .top-row {
-			justify-content: center;
-		}
-
-		.celebrating .score-prefix,
-		.celebrating .score-total {
-			display: none;
-		}
-
-		.celebrating .row-index,
-		.celebrating .stats,
-		.celebrating .controls,
-		.celebrating .auto-bonus,
-		.celebrating .line-list,
-		.celebrating .bottom-bar {
-			opacity: 0;
-			transform: translateY(8px);
-			filter: blur(4px);
-			pointer-events: none;
-		}
-
-		@media (min-width: 900px) {
-			body {
-				max-width: 920px;
-				margin: 0 auto;
-				box-shadow: 0 0 0 1px var(--line);
-			}
-		}
-	</style>
+    .section-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--muted-foreground);
+      margin-bottom: 0.5rem;
+    }
+    
+    .text-foreground { color: var(--foreground); }
+    .text-primary { color: var(--primary); }
+    .text-destructive { color: var(--destructive); }
+    .text-muted-foreground { color: var(--muted-foreground); }
+    .text-sm { font-size: 0.875rem; }
+  </style>
 </head>
 <body>
-	<section class="top-bar" aria-live="polite">
-		<div class="top-row">
-			<div id="scoreWrap" class="score-big"><span class="score-prefix">Punkte:</span> <span id="scoreBig">0</span> <span class="score-total">/ 552</span></div>
-			<div id="rowIndex" class="row-index">Zeile 1/1</div>
-		</div>
 
-		<div class="stats">
-			<span>Aufgaben: <b id="taskPoints">0</b></span>
-			<span>Bonus 3C: <b id="bonusPoints">0</b></span>
-			<span>Beruehrungsabzug: <b id="touchPenalty">0</b></span>
-			<span>Netto: <b id="netPoints">0</b></span>
-		</div>
-
-		<div class="controls">
-			<label for="touchCount">Beruehrungen</label>
-			<input id="touchCount" type="number" min="0" step="1" value="0" inputmode="numeric">
-			<button id="focusStart" class="action" type="button">Start</button>
-			<button id="resetAll" class="action" type="button">Reset</button>
-		</div>
-
-		<div id="autoBonusInfo" class="auto-bonus">
-			Bonus Aufgabe 3C: Wird automatisch vergeben, wenn Erdantenne und Weltallantenne beide auf <strong>rot</strong> stehen.
-		</div>
-	</section>
-
-	<ul id="lineList" class="line-list" aria-label="Aufgaben-Checkliste"></ul>
-
-	<section class="bottom-bar" aria-label="Antwortleiste">
-		<button id="btnNo" type="button">NEIN (Space)</button>
-		<button id="btnYes" type="button">JA (Enter)</button>
-	</section>
-
-	<section id="finishOverlay" class="finish-overlay" aria-hidden="true">
-		<div id="confettiLayer" class="confetti-layer"></div>
-		<div class="celebration-actions" role="dialog" aria-modal="true" aria-label="Finale Punktzahl">
-			<button id="finishRestart" class="finish-restart" type="button">Reset</button>
-		</div>
-	</section>
-
-	<script>
-		const defaultSolvedIds = new Set([
-			"12_BARRIER_BASE",
-			"12_BARRIER_A",
-			"12_BARRIER_B"
-		]);
-
-		const items = [
-			{ id: "1A_ROCKET", label: "1A Rakete vollständig/aufrecht im roten Bereich der Startrampe", points: 15 },
-			{ id: "1A_BASE", label: "1A Unterbau vollständig/aufrecht im roten Bereich der Startrampe", points: 15 },
-			{ id: "1A_STACK", label: "1A Rakete auf Unterbau, beides vollständig im roten Bereich", points: 10 },
-			{ id: "1B_FUEL_1", label: "1B Treibstoffelement 1 vollständig im roten Bereich der Startrampe", points: 11 },
-			{ id: "1B_FUEL_2", label: "1B Treibstoffelement 2 vollständig im roten Bereich der Startrampe", points: 11 },
-			{ id: "1C_LEVER", label: "1C Roter Hebel herausgezogen, rote Markierung berührt", points: 17 },
-
-			{ id: "2A_BUS", label: "2A Schulbus berührt roten Bereich der Sternwarte (aufrecht)", points: 18 },
-			{ id: "2B_RED", label: "2B Erdantenne: rot", points: 22, group: "EARTH_ANTENNA" },
-			{ id: "2B_MID", label: "2B Erdantenne: gelb oder grün", points: 17, group: "EARTH_ANTENNA" },
-
-			{ id: "3A_SAT_1", label: "3A Satellit 1 vollständig im lila Satellitenbereich", points: 13 },
-			{ id: "3A_SAT_2", label: "3A Satellit 2 vollständig im lila Satellitenbereich", points: 13 },
-			{ id: "3B_RED", label: "3B Weltallantenne: rot", points: 22, group: "SPACE_ANTENNA" },
-			{ id: "3B_MID", label: "3B Weltallantenne: gelb oder grün", points: 17, group: "SPACE_ANTENNA" },
-
-			{ id: "4_DEBRIS_1", label: "4 Nicht-blaues Trümmerteil vollständig in Draufsicht in Base", points: 13 },
-			{ id: "4_DEBRIS_2_BASE", label: "4 Blaues Trümmerteil vollständig in Draufsicht in Base", points: 13, group: "DEBRIS_BLUE" },
-			{ id: "4_DEBRIS_2_STERN", label: "4 Blaues Trümmerteil berührt Bereich der Sternwarte", points: 35, group: "DEBRIS_BLUE" },
-
-			{ id: "5_PERFECT", label: "5 Zwischen Pfosten ins Weltall, Matte verlassen (27)", points: 27, group: "TASK5" },
-			{ id: "5_BALL_DROP", label: "5 Wie oben, aber Ball/Bälle heruntergefallen (13)", points: 13, group: "TASK5" },
-
-			{ id: "6_BLUE", label: "6 Blauer Farbklotz vollständig im inneren blauen Bereich", points: 14 },
-			{ id: "6_YELLOW", label: "6 Gelber Farbklotz vollständig im inneren gelben Bereich", points: 14 },
-			{ id: "6_GREEN", label: "6 Grüner Farbklotz vollständig im inneren grünen Bereich", points: 14 },
-
-			{ id: "7A_BLOCK_1", label: "7A Materialblock 1 vollständig im schwarzen Experimentbereich", points: 13 },
-			{ id: "7A_BLOCK_2", label: "7A Materialblock 2 vollständig im schwarzen Experimentbereich", points: 13 },
-			{ id: "7B_EXPERIMENT", label: "7B Ball am unteren Ende des Experiments", points: 20 },
-
-			{ id: "8_CAPSULE", label: "8 Rückkehrkapsel unbeschadet und vollständig in Base", points: 25 },
-			{ id: "9_ROVER", label: "9 Rover in Draufsicht vollständig und aufrecht im hellblauen Bereich", points: 35 },
-
-			{ id: "10_SAMPLE_1", label: "10 Probe 1 vollständig in Draufsicht in Base", points: 35 },
-			{ id: "10_SAMPLE_2", label: "10 Probe 2 vollständig in Draufsicht in Base", points: 35 },
-
-			{ id: "11_ZONE_1", label: "11 Markierungsblock vollständig in hellgrünem Landebereich 1", points: 11 },
-			{ id: "11_ZONE_2", label: "11 Markierungsblock vollständig in hellgrünem Landebereich 2", points: 11 },
-			{ id: "11_ZONE_3", label: "11 Markierungsblock vollständig in hellgrünem Landebereich 3", points: 11 },
-			{ id: "11_ZONE_4", label: "11 Markierungsblock vollständig in hellgrünem Landebereich 4", points: 11 },
-
-			{ id: "12_BARRIER_BASE", label: "12 Barriere bei Base nicht verschoben/beschädigt", points: 11 },
-			{ id: "12_BARRIER_A", label: "12 Barriere neben Terrain A nicht verschoben/beschädigt", points: 11 },
-			{ id: "12_BARRIER_B", label: "12 Barriere neben Terrain B nicht verschoben/beschädigt", points: 11 },
-
-			{ id: "PENALTY_FAIR", label: "Verstoß gegen Fairnessgebot (Abzug 100)", points: -100 }
-		].map((item) => ({ ...item, checked: defaultSolvedIds.has(item.id) }));
-
-		const lineList = document.getElementById("lineList");
-		const rowIndex = document.getElementById("rowIndex");
-		const scoreWrap = document.getElementById("scoreWrap");
-		const scoreBig = document.getElementById("scoreBig");
-		const taskPoints = document.getElementById("taskPoints");
-		const bonusPoints = document.getElementById("bonusPoints");
-		const touchPenalty = document.getElementById("touchPenalty");
-		const netPoints = document.getElementById("netPoints");
-		const autoBonusInfo = document.getElementById("autoBonusInfo");
-		const touchCountInput = document.getElementById("touchCount");
-		const focusStart = document.getElementById("focusStart");
-		const resetAll = document.getElementById("resetAll");
-		const btnNo = document.getElementById("btnNo");
-		const btnYes = document.getElementById("btnYes");
-		const finishOverlay = document.getElementById("finishOverlay");
-		const confettiLayer = document.getElementById("confettiLayer");
-		const finishRestart = document.getElementById("finishRestart");
-		const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
-
-		let currentIndex = 0;
-		let manualScrollOverride = false;
-		let mobileRecenterTimer = null;
-		let scrollRequestId = 0;
-		let confettiCleanupTimer = null;
-		let scoreMorphFrame = null;
-		let scorePulseTimer = null;
-		let confettiStartTimer = null;
-
-		const SCORE_MORPH_MS = 880;
-
-		function formatPoints(value) {
-			return value > 0 ? `+${value}` : `${value}`;
-		}
-
-		function clearConfetti() {
-			if (confettiCleanupTimer !== null) {
-				clearTimeout(confettiCleanupTimer);
-				confettiCleanupTimer = null;
-			}
-			confettiLayer.textContent = "";
-		}
-
-		function clearCelebrationTimers() {
-			if (scorePulseTimer !== null) {
-				clearTimeout(scorePulseTimer);
-				scorePulseTimer = null;
-			}
-			if (confettiStartTimer !== null) {
-				clearTimeout(confettiStartTimer);
-				confettiStartTimer = null;
-			}
-		}
-
-		function launchConfetti() {
-			clearConfetti();
-			const palette = ["#7bcfff", "#43d4a8", "#f6cc70", "#f27878", "#bb8cff", "#9de5cf"];
-			const count = isCoarsePointer ? 84 : 120;
-			const fragment = document.createDocumentFragment();
-
-			for (let i = 0; i < count; i += 1) {
-				const piece = document.createElement("div");
-				piece.className = "confetti-piece";
-				const width = 4 + Math.random() * 9;
-				const height = width * (1.2 + Math.random() * 1.3);
-				const driftEnd = Math.round((Math.random() - 0.5) * 420);
-				const twirlEnd = (Math.random() > 0.5 ? 1 : -1) * (520 + Math.random() * 760);
-				const fall = 1800 + Math.random() * 1900;
-				const alpha = 0.62 + Math.random() * 0.34;
-				const radius = Math.random() > 0.78 ? "999px" : `${1 + Math.random() * 2.5}px`;
-				const color = palette[Math.floor(Math.random() * palette.length)];
-
-				piece.style.left = `${Math.random() * 100}%`;
-				piece.style.width = `${width}px`;
-				piece.style.height = `${height}px`;
-				piece.style.borderRadius = radius;
-				piece.style.background = color;
-				piece.style.opacity = String(alpha);
-				piece.style.setProperty("--alpha", `${alpha}`);
-				piece.style.setProperty("--drift-end", `${driftEnd}px`);
-				piece.style.setProperty("--twirl-end", `${twirlEnd}deg`);
-				piece.style.setProperty("--fall", `${fall}ms`);
-				piece.style.animationDelay = `${Math.random() * 220}ms`;
-				piece.style.transformOrigin = `${Math.round(Math.random() * 100)}% ${Math.round(Math.random() * 100)}%`;
-
-				fragment.appendChild(piece);
-			}
-
-			confettiLayer.appendChild(fragment);
-
-			confettiCleanupTimer = window.setTimeout(() => {
-				clearConfetti();
-			}, 4700);
-		}
-
-		function morphScoreToCenter() {
-			if (scoreMorphFrame !== null) {
-				cancelAnimationFrame(scoreMorphFrame);
-				scoreMorphFrame = null;
-			}
-
-			scoreWrap.classList.remove("score-pulse");
-			scoreWrap.classList.remove("score-centered");
-			const rect = scoreWrap.getBoundingClientRect();
-			scoreWrap.style.position = "fixed";
-			scoreWrap.style.left = `${rect.left}px`;
-			scoreWrap.style.top = `${rect.top}px`;
-			scoreWrap.style.width = `${rect.width}px`;
-			scoreWrap.style.margin = "0";
-			scoreWrap.style.zIndex = "70";
-			scoreWrap.style.transform = "translate(0, 0)";
-			scoreWrap.style.pointerEvents = "none";
-
-			// Force style application before transitioning to center.
-			scoreWrap.getBoundingClientRect();
-			scoreMorphFrame = requestAnimationFrame(() => {
-				scoreWrap.classList.add("score-centered");
-				scoreMorphFrame = null;
-			});
-		}
-
-		function resetScoreMorph() {
-			if (scoreMorphFrame !== null) {
-				cancelAnimationFrame(scoreMorphFrame);
-				scoreMorphFrame = null;
-			}
-
-			scoreWrap.classList.remove("score-centered");
-			scoreWrap.classList.remove("score-pulse");
-			scoreWrap.style.position = "";
-			scoreWrap.style.left = "";
-			scoreWrap.style.top = "";
-			scoreWrap.style.width = "";
-			scoreWrap.style.margin = "";
-			scoreWrap.style.zIndex = "";
-			scoreWrap.style.transform = "";
-			scoreWrap.style.pointerEvents = "";
-		}
-
-		function hideFinishOverlay() {
-			clearCelebrationTimers();
-			document.body.classList.remove("celebrating");
-			finishOverlay.classList.remove("active");
-			finishOverlay.setAttribute("aria-hidden", "true");
-			clearConfetti();
-			resetScoreMorph();
-		}
-
-		function showFinishOverlay() {
-			clearCelebrationTimers();
-			morphScoreToCenter();
-			document.body.classList.add("celebrating");
-			finishOverlay.classList.remove("active");
-			finishOverlay.setAttribute("aria-hidden", "false");
-
-			requestAnimationFrame(() => {
-				finishOverlay.classList.add("active");
-				confettiStartTimer = window.setTimeout(() => {
-					launchConfetti();
-					confettiStartTimer = null;
-				}, Math.max(180, SCORE_MORPH_MS - 160));
-
-				scorePulseTimer = window.setTimeout(() => {
-					scoreWrap.classList.remove("score-pulse");
-					void scoreWrap.offsetWidth;
-					scoreWrap.classList.add("score-pulse");
-					scorePulseTimer = null;
-				}, SCORE_MORPH_MS + 40);
-
-				try {
-					finishRestart.focus({ preventScroll: true });
-				} catch {
-					finishRestart.focus();
-				}
-			});
-		}
-
-		function resetGame() {
-			for (const item of items) {
-				item.checked = defaultSolvedIds.has(item.id);
-			}
-			touchCountInput.value = "0";
-			manualScrollOverride = false;
-			currentIndex = 0;
-			hideFinishOverlay();
-			renderList();
-			focusCurrent("auto");
-		}
-
-		function renderList() {
-			lineList.innerHTML = "";
-
-			items.forEach((item, idx) => {
-				const row = document.createElement("li");
-				row.className = "line";
-				row.tabIndex = -1;
-				row.dataset.index = String(idx);
-
-				const state = document.createElement("span");
-				state.className = `state ${item.checked ? "ok" : "no"}`;
-				state.textContent = item.checked ? "JA" : "NEIN";
-
-				const title = document.createElement("span");
-				title.className = "line-title";
-				title.textContent = item.label;
-
-				const pts = document.createElement("span");
-				pts.className = `line-points ${item.points < 0 ? "minus" : ""}`;
-				pts.textContent = formatPoints(item.points);
-
-				row.append(state, title, pts);
-
-				row.addEventListener("click", () => {
-					currentIndex = idx;
-					setAnswer(!items[idx].checked, false);
-				});
-
-				row.addEventListener("contextmenu", (event) => {
-					event.preventDefault();
-					currentIndex = idx;
-					setAnswer(false, false);
-				});
-
-				lineList.appendChild(row);
-			});
-
-			updateCurrentVisual();
-			updateScore();
-		}
-
-		function getAutoBonus3C() {
-			const earthRed = items.find((item) => item.id === "2B_RED").checked;
-			const spaceRed = items.find((item) => item.id === "3B_RED").checked;
-			return earthRed && spaceRed ? 15 : 0;
-		}
-
-		function getTouchPenalty() {
-			const touches = Math.max(0, Number.parseInt(touchCountInput.value || "0", 10) || 0);
-			return touches * 10;
-		}
-
-		function getTaskPoints() {
-			let points = 0;
-			const groupedMax = new Map();
-
-			for (const item of items) {
-				if (!item.checked) {
-					continue;
-				}
-
-				if (item.group) {
-					const prev = groupedMax.get(item.group);
-					if (prev === undefined || item.points > prev) {
-						groupedMax.set(item.group, item.points);
-					}
-				} else {
-					points += item.points;
-				}
-			}
-
-			for (const value of groupedMax.values()) {
-				points += value;
-			}
-
-			return points;
-		}
-
-		function updateScore() {
-			const points = getTaskPoints();
-
-			const bonus = getAutoBonus3C();
-			const touchesPenalty = getTouchPenalty();
-			const total = points + bonus - touchesPenalty;
-
-			taskPoints.textContent = String(points);
-			bonusPoints.textContent = String(bonus);
-			touchPenalty.textContent = `-${touchesPenalty}`;
-			netPoints.textContent = String(total);
-			scoreBig.textContent = String(total);
-
-			autoBonusInfo.innerHTML = bonus > 0
-				? "<strong>Bonus Aufgabe 3C aktiv:</strong> Beide Antennen stehen auf rot. <strong>+15 Punkte</strong>."
-				: "<strong>Bonus Aufgabe 3C:</strong> Wird automatisch vergeben, wenn Erdantenne und Weltallantenne beide auf <strong>rot</strong> stehen.";
-		}
-
-		function updateCurrentVisual() {
-			const rows = lineList.querySelectorAll(".line");
-			rows.forEach((row, idx) => {
-				row.classList.toggle("current", idx === currentIndex);
-			});
-			rowIndex.textContent = `Zeile ${currentIndex + 1}/${items.length}`;
-		}
-
-		function centerCurrentInView(behavior = "smooth") {
-			if (manualScrollOverride) {
-				return null;
-			}
-
-			const row = lineList.querySelector(`.line[data-index="${currentIndex}"]`);
-			if (!row) {
-				return null;
-			}
-
-			const listRect = lineList.getBoundingClientRect();
-			const rowRect = row.getBoundingClientRect();
-			const rowCenter = (rowRect.top - listRect.top) + lineList.scrollTop + (rowRect.height / 2);
-			const targetTop = rowCenter - (lineList.clientHeight / 2);
-			const maxTop = Math.max(0, lineList.scrollHeight - lineList.clientHeight);
-			const nextTop = Math.max(0, Math.min(maxTop, targetTop));
-			const requestId = ++scrollRequestId;
-
-			lineList.scrollTo({ top: nextTop, behavior });
-			return { targetTop: nextTop, requestId };
-		}
-
-		function scheduleMobileRecenter(targetTop, requestId) {
-			if (!isCoarsePointer) {
-				return;
-			}
-
-			if (mobileRecenterTimer !== null) {
-				clearTimeout(mobileRecenterTimer);
-			}
-
-			mobileRecenterTimer = window.setTimeout(() => {
-				mobileRecenterTimer = null;
-
-				if (manualScrollOverride || requestId !== scrollRequestId) {
-					return;
-				}
-
-				const delta = Math.abs(lineList.scrollTop - targetTop);
-				if (delta > 10) {
-					lineList.scrollTo({ top: targetTop, behavior: "auto" });
-				}
-			}, 260);
-		}
-
-		function focusCurrent(scrollBehavior = "smooth") {
-			const row = lineList.querySelector(`.line[data-index="${currentIndex}"]`);
-			if (row) {
-				if (!isCoarsePointer) {
-					try {
-						row.focus({ preventScroll: true });
-					} catch {
-						row.focus();
-					}
-				}
-				const scrollResult = centerCurrentInView(scrollBehavior);
-
-				// On mobile, keep smooth scrolling and only hard-correct if browser drifts.
-				if (isCoarsePointer && scrollResult && scrollBehavior === "smooth") {
-					scheduleMobileRecenter(scrollResult.targetTop, scrollResult.requestId);
-				}
-			}
-			updateCurrentVisual();
-		}
-
-		function move(delta) {
-			currentIndex = Math.max(0, Math.min(items.length - 1, currentIndex + delta));
-			focusCurrent();
-		}
-
-		function setAnswer(value, moveNext = true) {
-			const isLastEntry = currentIndex === items.length - 1;
-			const current = items[currentIndex];
-			current.checked = value;
-			manualScrollOverride = false;
-
-			renderList();
-
-			if (moveNext && currentIndex < items.length - 1) {
-				currentIndex += 1;
-			}
-
-			focusCurrent();
-
-			if (isLastEntry) {
-				showFinishOverlay();
-			}
-		}
-
-		document.addEventListener("keydown", (event) => {
-			if (finishOverlay.classList.contains("active")) {
-				return;
-			}
-
-			const active = document.activeElement;
-
-			if (active === touchCountInput) {
-				if (event.key === "ArrowUp" || event.key === "ArrowDown") {
-					setTimeout(updateScore, 0);
-				}
-				return;
-			}
-
-			if (!(active instanceof HTMLElement) || !active.classList.contains("line")) {
-				return;
-			}
-
-			if (event.key === "ArrowDown") {
-				event.preventDefault();
-				move(1);
-				return;
-			}
-
-			if (event.key === "ArrowUp") {
-				event.preventDefault();
-				move(-1);
-				return;
-			}
-
-			if (event.key === "Enter") {
-				event.preventDefault();
-				setAnswer(true, true);
-				return;
-			}
-
-			if (event.key === " " || event.code === "Space") {
-				event.preventDefault();
-				setAnswer(false, true);
-			}
-		});
-
-		lineList.addEventListener("wheel", () => {
-			manualScrollOverride = true;
-		}, { passive: true });
-
-		lineList.addEventListener("touchmove", () => {
-			manualScrollOverride = true;
-		}, { passive: true });
-
-		lineList.addEventListener("pointerdown", (event) => {
-			if (!(event.target instanceof Element) || !event.target.closest(".line")) {
-				manualScrollOverride = true;
-			}
-		});
-
-		touchCountInput.addEventListener("input", () => {
-			const raw = touchCountInput.value;
-			if (raw === "") {
-				updateScore();
-				return;
-			}
-
-			const n = Number.parseInt(raw, 10);
-			if (Number.isNaN(n) || n < 0) {
-				touchCountInput.value = "0";
-			}
-
-			updateScore();
-		});
-
-		focusStart.addEventListener("click", () => {
-			hideFinishOverlay();
-			currentIndex = 0;
-			focusCurrent();
-		});
-
-		resetAll.addEventListener("click", () => {
-			resetGame();
-		});
-
-		finishRestart.addEventListener("click", () => {
-			resetGame();
-		});
-
-		btnYes.addEventListener("click", () => {
-			setAnswer(true, true);
-		});
-
-		btnNo.addEventListener("click", () => {
-			setAnswer(false, true);
-		});
-
-		renderList();
-		focusCurrent("auto");
-	</script>
+  <header class="header">
+    <div class="container header-content">
+      <div class="score-container">
+        <div class="score-main">
+          Punkte: <span id="scoreTotal" class="text-primary">0</span> <span class="text-muted-foreground text-sm font-medium">/ 552</span>
+        </div>
+        <div class="score-details">
+          <span>Aufgaben: <strong id="scoreTasks" class="text-foreground">0</strong></span>
+          <span>Abzug: <strong id="scorePenalty" class="text-destructive">0</strong></span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btnReset" class="btn btn-secondary">Zurücksetzen</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="bonusBanner" class="auto-bonus-banner" style="display: none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+      <div>
+        <strong>Bonus Aufgabe 3C aktiv!</strong> Beide Antennen stehen auf rot. <strong>+15 Punkte</strong>.
+      </div>
+    </div>
+    
+    <div id="tasksContainer"></div>
+  </main>
+
+  <script>
+    const tasks = [
+      {
+        id: "task_1",
+        title: "Aufgabe 1: Rakete & Startrampe",
+        items: [
+          { id: "1A_ROCKET", type: "checkbox", label: "1A Rakete vollständig/aufrecht im roten Bereich", points: 15 },
+          { id: "1A_BASE", type: "checkbox", label: "1A Unterbau vollständig/aufrecht im roten Bereich", points: 15 },
+          { id: "1A_STACK", type: "checkbox", label: "1A Rakete auf Unterbau, beides vollständig im roten Bereich", points: 10 },
+          { id: "1B_FUEL_1", type: "checkbox", label: "1B Treibstoffelement 1 vollständig im roten Bereich", points: 11 },
+          { id: "1B_FUEL_2", type: "checkbox", label: "1B Treibstoffelement 2 vollständig im roten Bereich", points: 11 },
+          { id: "1C_LEVER", type: "checkbox", label: "1C Roter Hebel herausgezogen, rote Markierung berührt", points: 17 },
+        ]
+      },
+      {
+        id: "task_2",
+        title: "Aufgabe 2: Sternwarte & Erdantenne",
+        items: [
+          { id: "2A_BUS", type: "checkbox", label: "2A Schulbus berührt roten Bereich der Sternwarte (aufrecht)", points: 18 },
+          { 
+            id: "2B_ANTENNA", 
+            type: "radio", 
+            label: "2B Erdantenne",
+            options: [
+              { value: "RED", label: "Rot", points: 22 },
+              { value: "YELLOW_GREEN", label: "Gelb oder Grün", points: 17 },
+              { value: "NONE", label: "Keine Wertung", points: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: "task_3",
+        title: "Aufgabe 3: Satelliten & Weltallantenne",
+        items: [
+          { id: "3A_SAT_1", type: "checkbox", label: "3A Satellit 1 vollständig im lila Satellitenbereich", points: 13 },
+          { id: "3A_SAT_2", type: "checkbox", label: "3A Satellit 2 vollständig im lila Satellitenbereich", points: 13 },
+          { 
+            id: "3B_ANTENNA", 
+            type: "radio", 
+            label: "3B Weltallantenne",
+            options: [
+              { value: "RED", label: "Rot", points: 22 },
+              { value: "YELLOW_GREEN", label: "Gelb oder Grün", points: 17 },
+              { value: "NONE", label: "Keine Wertung", points: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: "task_4",
+        title: "Aufgabe 4: Trümmerteile",
+        items: [
+          { id: "4_DEBRIS_1", type: "checkbox", label: "Nicht-blaues Trümmerteil vollständig in Draufsicht in Base", points: 13 },
+          { 
+            id: "4_DEBRIS_BLUE", 
+            type: "radio", 
+            label: "Blaues Trümmerteil",
+            options: [
+              { value: "STERNWARTE", label: "Berührt Bereich der Sternwarte", points: 35 },
+              { value: "BASE", label: "Vollständig in Draufsicht in Base", points: 13 },
+              { value: "NONE", label: "Keine Wertung", points: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: "task_5",
+        title: "Aufgabe 5: Flug ins Weltall",
+        items: [
+          { 
+            id: "5_SPACE", 
+            type: "radio", 
+            label: "Zwischen Pfosten ins Weltall, Matte verlassen",
+            options: [
+              { value: "PERFECT", label: "Ohne Ball-Drop (27)", points: 27 },
+              { value: "DROP", label: "Ball heruntergefallen (13)", points: 13 },
+              { value: "NONE", label: "Keine Wertung", points: 0 }
+            ]
+          }
+        ]
+      },
+      {
+        id: "task_6",
+        title: "Aufgabe 6: Farbklötze",
+        items: [
+          { id: "6_BLUE", type: "checkbox", label: "Blauer Farbklotz im blauen Bereich", points: 14 },
+          { id: "6_YELLOW", type: "checkbox", label: "Gelber Farbklotz im gelben Bereich", points: 14 },
+          { id: "6_GREEN", type: "checkbox", label: "Grüner Farbklotz im grünen Bereich", points: 14 },
+        ]
+      },
+      {
+        id: "task_7",
+        title: "Aufgabe 7: Experiment",
+        items: [
+          { id: "7A_BLOCK_1", type: "checkbox", label: "7A Materialblock 1 im schwarzen Bereich", points: 13 },
+          { id: "7A_BLOCK_2", type: "checkbox", label: "7A Materialblock 2 im schwarzen Bereich", points: 13 },
+          { id: "7B_BALL", type: "checkbox", label: "7B Ball am unteren Ende", points: 20 },
+        ]
+      },
+      {
+        id: "task_8",
+        title: "Aufgabe 8: Rückkehrkapsel",
+        items: [
+          { id: "8_CAPSULE", type: "checkbox", label: "Rückkehrkapsel unbeschadet und vollständig in Base", points: 25 },
+        ]
+      },
+      {
+        id: "task_9",
+        title: "Aufgabe 9: Rover",
+        items: [
+          { id: "9_ROVER", type: "checkbox", label: "Rover in Draufsicht vollständig und aufrecht im hellblauen Bereich", points: 35 },
+        ]
+      },
+      {
+        id: "task_10",
+        title: "Aufgabe 10: Proben",
+        items: [
+          { id: "10_SAMPLE_1", type: "checkbox", label: "Probe 1 vollständig in Draufsicht in Base", points: 35 },
+          { id: "10_SAMPLE_2", type: "checkbox", label: "Probe 2 vollständig in Draufsicht in Base", points: 35 },
+        ]
+      },
+      {
+        id: "task_11",
+        title: "Aufgabe 11: Landebereich",
+        items: [
+          { id: "11_ZONE_1", type: "checkbox", label: "Markierungsblock in Zone 1", points: 11 },
+          { id: "11_ZONE_2", type: "checkbox", label: "Markierungsblock in Zone 2", points: 11 },
+          { id: "11_ZONE_3", type: "checkbox", label: "Markierungsblock in Zone 3", points: 11 },
+          { id: "11_ZONE_4", type: "checkbox", label: "Markierungsblock in Zone 4", points: 11 },
+        ]
+      },
+      {
+        id: "task_12",
+        title: "Aufgabe 12: Barrieren",
+        items: [
+          { id: "12_BARRIER_BASE", type: "checkbox", label: "Barriere bei Base nicht verschoben", points: 11 },
+          { id: "12_BARRIER_A", type: "checkbox", label: "Barriere Terrain A nicht verschoben", points: 11 },
+          { id: "12_BARRIER_B", type: "checkbox", label: "Barriere Terrain B nicht verschoben", points: 11 },
+        ]
+      },
+      {
+        id: "penalties",
+        title: "Abzüge",
+        items: [
+          { id: "PENALTY_TOUCH", type: "number", label: "Berührungen (-10 pro Touch)", step: 1, min: 0 },
+          { id: "PENALTY_FAIR", type: "checkbox", label: "Verstoß gegen Fairnessgebot", points: -100 },
+        ]
+      }
+    ];
+
+    const initialState = {
+      checkboxes: {
+        "12_BARRIER_BASE": true,
+        "12_BARRIER_A": true,
+        "12_BARRIER_B": true
+      },
+      radios: {
+        "2B_ANTENNA": "NONE",
+        "3B_ANTENNA": "NONE",
+        "4_DEBRIS_BLUE": "NONE",
+        "5_SPACE": "NONE"
+      },
+      numbers: {
+        "PENALTY_TOUCH": 0
+      },
+      interacted: {}
+    };
+
+    let state = JSON.parse(JSON.stringify(initialState));
+    let previousScores = { total: 0, tasks: 0, bonus: 0, penalty: 0 };
+
+    function markTaskInteracted(taskId) {
+      state.interacted[taskId] = true;
+    }
+
+    function animateNumber(id, start, end, duration, prefix = "") {
+      const element = document.getElementById(id);
+      if (start === end) {
+        element.innerText = (end > 0) ? `${prefix}${end}` : "0";
+        return;
+      }
+      let startTime = null;
+      const easeOutQuad = t => t * (2 - t);
+      
+      const step = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const current = Math.round(easeOutQuad(progress) * (end - start) + start);
+        element.innerText = (current > 0) ? `${prefix}${current}` : "0";
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          element.innerText = (end > 0) ? `${prefix}${end}` : "0";
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    function updateCardColors() {
+      tasks.forEach(task => {
+        const card = document.getElementById(`card-${task.id}`);
+        if (!card) return;
+
+        card.classList.remove("status-red", "status-yellow", "status-green");
+
+        if (!state.interacted[task.id]) {
+          return;
+        }
+
+        if (task.id === "penalties") {
+          const penaltyPts = (state.numbers["PENALTY_TOUCH"] || 0) * 10 + (state.checkboxes["PENALTY_FAIR"] ? 100 : 0);
+          if (penaltyPts > 0) {
+            card.classList.add("status-red");
+          } else {
+            card.classList.add("status-green");
+          }
+          return;
+        }
+
+        let maxPoints = 0;
+        let currentPoints = 0;
+
+        task.items.forEach(item => {
+          if (item.type === "checkbox") {
+            maxPoints += item.points;
+            if (state.checkboxes[item.id]) {
+              currentPoints += item.points;
+            }
+          } else if (item.type === "radio") {
+            let maxRadio = 0;
+            item.options.forEach(opt => {
+              if (opt.points > maxRadio) maxRadio = opt.points;
+            });
+            maxPoints += maxRadio;
+            
+            const selectedValue = state.radios[item.id];
+            const option = item.options.find(o => o.value === selectedValue);
+            if (option) {
+              currentPoints += option.points;
+            }
+          }
+        });
+
+        if (currentPoints === 0) {
+          card.classList.add("status-red");
+        } else if (currentPoints === maxPoints) {
+          card.classList.add("status-green");
+        } else {
+          card.classList.add("status-yellow");
+        }
+      });
+    }
+
+    function calculatePoints() {
+      let total = 0;
+      let taskP = 0;
+      let penalty = state.checkboxes["PENALTY_FAIR"] ? 100 : 0;
+      let touchPen = state.numbers["PENALTY_TOUCH"] * 10;
+      let bonus = (state.radios["2B_ANTENNA"] === "RED" && state.radios["3B_ANTENNA"] === "RED") ? 15 : 0;
+      
+      tasks.forEach(task => {
+        task.items.forEach(item => {
+          if (item.type === "checkbox" && state.checkboxes[item.id] && item.id !== "PENALTY_FAIR") {
+            taskP += item.points;
+          } else if (item.type === "radio") {
+            const selectedValue = state.radios[item.id];
+            const option = item.options.find(o => o.value === selectedValue);
+            if (option) {
+              taskP += option.points;
+            }
+          }
+        });
+      });
+      
+      const totalPenalty = touchPen + penalty;
+      total = taskP + bonus - totalPenalty;
+      
+      if (previousScores.total !== total) {
+        const totalEl = document.getElementById("scoreTotal");
+        totalEl.classList.remove("pop-animation");
+        void totalEl.offsetWidth;
+        totalEl.classList.add("pop-animation");
+        animateNumber("scoreTotal", previousScores.total, total, 400);
+      } else {
+        document.getElementById("scoreTotal").innerText = total;
+      }
+
+      animateNumber("scoreTasks", previousScores.tasks, taskP, 300);
+      document.getElementById("scoreBonus").innerText = bonus; // Instant update for bonus
+      animateNumber("scorePenalty", previousScores.penalty, totalPenalty, 300, "-");
+      
+      previousScores = { total, tasks: taskP, bonus, penalty: totalPenalty };
+      
+      const bonusBanner = document.getElementById("bonusBanner");
+      if (bonus > 0) {
+        bonusBanner.style.display = "flex";
+      } else {
+        bonusBanner.style.display = "none";
+      }
+      
+      updateCardColors();
+    }
+
+    function renderTasks() {
+      const container = document.getElementById("tasksContainer");
+      container.innerHTML = "";
+      
+      tasks.forEach(task => {
+        const card = document.createElement("div");
+        card.id = `card-${task.id}`;
+        card.className = "card";
+        
+        const header = document.createElement("div");
+        header.className = "card-header";
+        header.innerHTML = `<h3 class="card-title">${task.title}</h3>`;
+        card.appendChild(header);
+        
+        const content = document.createElement("div");
+        content.className = "card-content";
+        
+        task.items.forEach(item => {
+          if (item.type === "checkbox") {
+            const label = document.createElement("label");
+            label.className = "form-item";
+            label.style.cursor = "pointer";
+            
+            const input = document.createElement("input");
+            input.type = "checkbox";
+            input.className = "native-hidden";
+            input.checked = !!state.checkboxes[item.id];
+            
+            const indicator = document.createElement("div");
+            indicator.className = "control-indicator checkbox-indicator";
+            indicator.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+            
+            const textContainer = document.createElement("div");
+            textContainer.className = "label-container";
+            textContainer.innerHTML = `
+              <div class="label-title">${item.label}</div>
+              ${item.points !== undefined ? `<div class="points-badge ${item.points > 0 ? 'positive' : 'negative'}">${item.points > 0 ? '+' : ''}${item.points}</div>` : ''}
+            `;
+            
+            input.addEventListener("change", (e) => {
+              state.checkboxes[item.id] = e.target.checked;
+              markTaskInteracted(task.id);
+              calculatePoints();
+            });
+            
+            label.appendChild(input);
+            label.appendChild(indicator);
+            label.appendChild(textContainer);
+            content.appendChild(label);
+            
+          } else if (item.type === "radio") {
+            const group = document.createElement("div");
+            group.className = "flex-col mt-4";
+            
+            const sectionLabel = document.createElement("div");
+            sectionLabel.className = "section-label";
+            sectionLabel.textContent = item.label;
+            group.appendChild(sectionLabel);
+            
+            const optionsGrid = document.createElement("div");
+            optionsGrid.className = "grid-2";
+            
+            item.options.forEach(opt => {
+              const label = document.createElement("label");
+              label.className = "form-item";
+              label.style.cursor = "pointer";
+              
+              const input = document.createElement("input");
+              input.type = "radio";
+              input.name = item.id;
+              input.className = "native-hidden";
+              input.value = opt.value;
+              input.checked = state.radios[item.id] === opt.value;
+              
+              const indicator = document.createElement("div");
+              indicator.className = "control-indicator radio-indicator";
+              
+              const textContainer = document.createElement("div");
+              textContainer.className = "label-container";
+              textContainer.innerHTML = `
+                <div class="label-title">${opt.label}</div>
+                ${opt.points !== undefined && opt.points !== 0 ? `<div class="points-badge ${opt.points > 0 ? 'positive' : 'negative'}">${opt.points > 0 ? '+' : ''}${opt.points}</div>` : ''}
+              `;
+              
+              input.addEventListener("change", (e) => {
+                if (e.target.checked) {
+                  state.radios[item.id] = opt.value;
+                  markTaskInteracted(task.id);
+                  calculatePoints();
+                }
+              });
+              
+              label.appendChild(input);
+              label.appendChild(indicator);
+              label.appendChild(textContainer);
+              optionsGrid.appendChild(label);
+            });
+            
+            group.appendChild(optionsGrid);
+            content.appendChild(group);
+            
+          } else if (item.type === "number") {
+            const group = document.createElement("div");
+            group.className = "flex-col";
+            
+            const label = document.createElement("label");
+            label.className = "section-label";
+            label.textContent = item.label;
+            
+            const stepper = document.createElement("div");
+            stepper.className = "stepper";
+            
+            const btnMinus = document.createElement("button");
+            btnMinus.className = "stepper-btn";
+            btnMinus.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>`;
+            
+            const valueSpan = document.createElement("div");
+            valueSpan.className = "stepper-value";
+            valueSpan.textContent = state.numbers[item.id];
+            
+            const btnPlus = document.createElement("button");
+            btnPlus.className = "stepper-btn";
+            btnPlus.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>`;
+            
+            const updateStepper = () => {
+              valueSpan.textContent = state.numbers[item.id];
+              markTaskInteracted(task.id);
+              calculatePoints();
+            };
+
+            btnMinus.addEventListener("click", () => {
+              if (state.numbers[item.id] > (item.min || 0)) {
+                state.numbers[item.id] -= (item.step || 1);
+                updateStepper();
+              }
+            });
+            
+            btnPlus.addEventListener("click", () => {
+              state.numbers[item.id] += (item.step || 1);
+              updateStepper();
+            });
+            
+            stepper.appendChild(btnMinus);
+            stepper.appendChild(valueSpan);
+            stepper.appendChild(btnPlus);
+            
+            group.appendChild(label);
+            group.appendChild(stepper);
+            content.appendChild(group);
+          }
+        });
+        
+        card.appendChild(content);
+        container.appendChild(card);
+      });
+    }
+
+    document.getElementById("btnReset").addEventListener("click", () => {
+      state = JSON.parse(JSON.stringify(initialState));
+      renderTasks();
+      calculatePoints();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    renderTasks();
+    calculatePoints();
+  </script>
 </body>
 </html>
