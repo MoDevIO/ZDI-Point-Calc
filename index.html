@@ -414,6 +414,7 @@
         </div>
         <div class="score-details">
           <span>Aufgaben: <strong id="scoreTasks" class="text-foreground">0</strong></span>
+          <span>Bonus: <strong id="scoreBonus" class="text-primary">0</strong></span>
           <span>Abzug: <strong id="scorePenalty" class="text-destructive">0</strong></span>
         </div>
       </div>
@@ -427,7 +428,7 @@
     <div id="bonusBanner" class="auto-bonus-banner" style="display: none;">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
       <div>
-        <strong>Bonus Aufgabe 3C aktiv!</strong> Beide Antennen stehen auf rot. <strong>+15 Punkte</strong>.
+        <strong>Bonus Aufgabe 3C aktiv!</strong> Beide Antennen sind gleich ausgerichtet. <strong>+15 Punkte</strong>.
       </div>
     </div>
     
@@ -459,7 +460,8 @@
             label: "2B Erdantenne",
             options: [
               { value: "RED", label: "Rot", points: 22 },
-              { value: "YELLOW_GREEN", label: "Gelb oder Grün", points: 17 },
+              { value: "YELLOW", label: "Gelb", points: 17 },
+              { value: "GREEN", label: "Grün", points: 17 },
               { value: "NONE", label: "Keine Wertung", points: 0 }
             ]
           }
@@ -477,7 +479,8 @@
             label: "3B Weltallantenne",
             options: [
               { value: "RED", label: "Rot", points: 22 },
-              { value: "YELLOW_GREEN", label: "Gelb oder Grün", points: 17 },
+              { value: "YELLOW", label: "Gelb", points: 17 },
+              { value: "GREEN", label: "Grün", points: 17 },
               { value: "NONE", label: "Keine Wertung", points: 0 }
             ]
           }
@@ -693,7 +696,9 @@
       let taskP = 0;
       let penalty = state.checkboxes["PENALTY_FAIR"] ? 100 : 0;
       let touchPen = state.numbers["PENALTY_TOUCH"] * 10;
-      let bonus = (state.radios["2B_ANTENNA"] === "RED" && state.radios["3B_ANTENNA"] === "RED") ? 15 : 0;
+      const ant2 = state.radios["2B_ANTENNA"];
+      const ant3 = state.radios["3B_ANTENNA"];
+      let bonus = (ant2 !== "NONE" && ant2 === ant3) ? 15 : 0;
       
       tasks.forEach(task => {
         task.items.forEach(item => {
