@@ -744,7 +744,7 @@
       let touchPen = state.numbers["PENALTY_TOUCH"] * 10;
       const ant2 = state.radios["2B_ANTENNA"];
       const ant3 = state.radios["3B_ANTENNA"];
-      let bonus = (ant2 !== "NONE" && ant2 === ant3) ? 15 : 0;
+      let bonus = (ant2 === "RED" && ant3 === "RED") ? 15 : 0;
       
       tasks.forEach(task => {
         task.items.forEach(item => {
